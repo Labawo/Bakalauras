@@ -1,0 +1,68 @@
+.previous-button,
+.next-button {
+    border: none;
+    background-color: white;
+    color: black;
+    margin-top: 10px;
+    margin-left: 15px; /* Add left margin */
+    margin-right: 0;
+    font-size: 30px;
+    cursor: pointer; /* Add pointer cursor on hover */
+    padding: 10px 20px; /* Add padding for better spacing */
+}
+
+.test-form {
+    font-size: 18px;
+    color: black;
+    background-color: white;
+    padding-top: 20px;
+    border-radius: 50px;
+    max-width: 500px; /* Set maximum width to prevent it from stretching too wide */
+    margin: 0 auto; /* Center the form horizontally */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+}
+
+input[type="radio"] {
+    transform: scale(1.5); /* Increase the size */
+    margin-right: 10px; /* Add some spacing */
+    margin-left: 15px; /* Align to right with left margin */
+}
+
+/* Add hover effect on buttons */
+.previous-button:hover,
+.next-button:hover {
+    background-color: #f0f0f0; /* Light grey background on hover */
+    color: #333; /* Darker text color on hover */
+}
+
+/* Style the pagination buttons container */
+.pagination-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: left;
+}
+
+/* Style the submit button */
+.submit-button-test {
+    border: none;
+    background-color: #007bff; /* Blue submit button */
+    color: white;
+    padding: 10px 20px;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 20px;
+    margin: auto;
+}
+
+.submit-button-test:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Style form labels */
+.test-label {
+    margin: 50%;
+    padding-bottom: 20px;
+    font-weight: bold; /* Make labels bold */
+    margin-bottom: 10px; /* Add margin below labels */
+}

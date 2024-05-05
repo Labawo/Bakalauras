@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA7uhDeuLjAEusB21c0cQoKAAAAAACAAAAAAAQZgAAAAEAACAAAACyhE4LjPUtjbb9l950H2/a5kCNUrk5cQHW4UFVPzEAJAAAAAAOgAAAAAIAACAAAACOrrWB5Q+VHXxB7uRWhgB4hkjUA8h6LUH29SB6C9GRT4AAAAADpwAHWFG4S7aQb6N3rANvE9IZpdwP57sACxYtRrNT+jNaiDsbiisxvZGz2+UnssI4+URwY/U0GK4HI10R+TaFqGPP5nPV+zpVJEzdgC6qI0bKWwbt5edfmzazbl7BXsmLJUVX/Z68kTa9yEtDRKIqkWLXkdA0hkUhVODBnSRha0AAAABYAb06AXBGsZAz17acs5epDY9rwGeOTzCuPAisoVqiflwpbrWr94HWrB87J7JxLWv62xcbKSq6VWvdqxaZR7sA</EncryptedPassword>
+    <History>True|2023-11-23T07:08:46.0882631Z;True|2023-11-23T03:41:32.7680123+02:00;True|2023-11-23T03:38:35.8524856+02:00;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="WebApiDatabase">
+      <Value>server=saitynusrv.mysql.database.azure.com%3bport=3306%3b database=Saitynai-crud-api%3b user=labawo%3b password=saitynai12.</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+</Project>

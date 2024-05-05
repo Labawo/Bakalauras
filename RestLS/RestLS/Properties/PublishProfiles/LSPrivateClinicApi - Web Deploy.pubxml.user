@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA7uhDeuLjAEusB21c0cQoKAAAAAACAAAAAAAQZgAAAAEAACAAAAAe5SQGa/X702dbZ+PuYFKr63tj2L/Z5zuCTtFS3xt18gAAAAAOgAAAAAIAACAAAABUSiUlWuWBIP+5ZcDcW9S8YjbeIF95GekoddXTfrz0DYAAAAAJkgbIfEqGqeeTTge8CjTXOQnYwLHa+H8vv3FZ8Ois1JD7K4jUDsiNpvdyOK5eJvPiLIPRQUi6dmeZGDxYlcRsLWbmCkUPE03Sj47K9X874hEK9L/C0AdEHS6EGGVDlpn9y4r/IsCqxAsmWG2wiSsiewFTaXWQLR0mPOnC11z3Y0AAAADbJYjrvmb4cI07/Ni9lYiDt92aClShDLJc9H1vJ4hQ5fs0MNwga285MFxrxP+Ou1WkwSzvS+8qq0wBhf5KCqWg</EncryptedPassword>
+    <History>True|2023-11-23T00:37:21.0585281Z;True|2023-11-23T00:58:34.6078961+02:00;True|2023-11-23T00:42:19.9839904+02:00;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="WebApiDatabase">
+      <Value>Data Source=restlsdbserver.database.windows.net,1433%3bInitial Catalog=RestLS_db%3bUser ID=labawo%3bPassword=saitynai12.</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+</Project>

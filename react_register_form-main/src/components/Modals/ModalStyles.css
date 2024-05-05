@@ -1,0 +1,89 @@
+/* Responsive modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000; /* Set a high z-index value */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.show {
+    display: block;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 8px;
+}
+
+/* Close button */
+.close {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Modal buttons */
+.modal-buttons {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.modal-buttons button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.modal-buttons button:hover {
+    background-color: #0056b3;
+}
+
+/* Custom button classes */
+.primary-button {
+    background-color: #007bff;
+}
+
+.secondary-button {
+    background-color: #6c757d;
+}
+
+.error-header {
+    color:red;
+}
+
+.success-header {
+    color:green;
+}
+
+/* Responsive button */
+@media only screen and (max-width: 600px) {
+    .modal-content {
+        width: 90%;
+        margin: 20% auto;
+    }
+}
