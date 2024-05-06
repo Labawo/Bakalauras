@@ -51,6 +51,14 @@ const Editor = () => {
         }
     };
 
+    const handleTestAllowance = async (patientId) => {
+        try {
+            await axiosPrivate.put(`/allowTest/${patientId}`);
+        } catch (error) {
+            console.error("Error alowing test for user:", error);
+        }
+    };
+
     const filteredAppointments = appointments.filter(appointment => {
         if (startDate) {
             const appointmentDate = new Date(appointment.time.split('T')[0]);
@@ -89,8 +97,11 @@ const Editor = () => {
                                     <tr key={i}>
                                         <td>{appointment?.time.split('T')[0]}</td>
                                         <td>{appointment?.time.split('T')[1].slice(0, 5)}</td>
-                                        <td>{appointment?.patientId}</td>
+                                        <td>{appointment?.patientName}</td>
                                         <td>
+                                            <button className="table-buttons-green" onClick={() => handleTestAllowance(appointment.patientId)}>
+                                                Allow test
+                                            </button>
                                             <button className="table-buttons-red" onClick={() => handleDeleteAppointment(appointment.id)}>
                                                 <FontAwesomeIcon icon={faTrash} />
                                             </button>

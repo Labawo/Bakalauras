@@ -114,63 +114,67 @@ const Tests = () => {
     return (
         <article className="tests-container">
             {isAdmin && patients.length > 0 && ( // Render patient selection only if user is admin and patients data is available
-                <div className="patient-selection">
-                    <label htmlFor="patientSelect">Select Patient:</label>
-                    <select id="patientSelect" onChange={handlePatientSelect}>
-                        <option value="">Select Patient</option>
-                        {patients.map((patient) => (
-                            <option key={patient.id} value={patient.id}>
-                                {patient.userName}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-            )}
-            <div className="table-container">
-                {tests.length > 0 && (
-                    <div>
-                        <h2>Average Score Analysis:</h2>
-                        <p className="test-score-p">{calculateAverageScoreMessage()}</p>
-                    </div>
-                )}
-                <h2 className="list-headers">BDI Tests</h2>
-                {tests.length ? (
-                    <table className="my-table">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Score</th>
-                                {isAdmin && <th>Action</th>}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {tests.map((test, i) => (
-                                <tr key={i}>
-                                    <td>{test?.name}</td>
-                                    <td>{test?.score}</td>
-                                    {isAdmin && (
-                                        <td>
-                                            <button
-                                                className="table-buttons-red"
-                                                onClick={() => removeTest(test.id)}
-                                            >
-                                                <FontAwesomeIcon icon={faTrash} />
-                                            </button>
-                                        </td>
-                                    )}
-                                </tr>
+                <>
+                    <div className="patient-selection">
+                        <label htmlFor="patientSelect">Select Patient:</label>
+                        <select id="patientSelect" onChange={handlePatientSelect}>
+                            <option value="">Select Patient</option>
+                            {patients.map((patient) => (
+                                <option key={patient.id} value={patient.id}>
+                                    {patient.userName}
+                                </option>
                             ))}
-                        </tbody>
-                    </table>
-                ) : (
-                    <p className="no-list-items-p">No tests to display</p>
-                )}
-                {isLoading ? (
-                    <p>Loading...</p>
-                ) : tests.length > 2 ? (
-                    <button onClick={loadNextPageTests} className="load-button-v1">Load More</button>
-                ) : null}
-            </div>
+                        </select>
+                    </div>
+
+                    <div className="table-container">
+                        {tests.length > 0 && (
+                            <div>
+                                <h2>Average Score Analysis:</h2>
+                                <p className="test-score-p">{calculateAverageScoreMessage()}</p>
+                            </div>
+                        )}
+                        <h2 className="list-headers">BDI Tests</h2>
+                        {tests.length ? (
+                            <table className="my-table">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Score</th>
+                                        {isAdmin && <th>Action</th>}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {tests.map((test, i) => (
+                                        <tr key={i}>
+                                            <td>{test?.name}</td>
+                                            <td>{test?.score}</td>
+                                            {isAdmin && (
+                                                <td>
+                                                    <button
+                                                        className="table-buttons-red"
+                                                        onClick={() => removeTest(test.id)}
+                                                    >
+                                                        <FontAwesomeIcon icon={faTrash} />
+                                                    </button>
+                                                </td>
+                                            )}
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        ) : (
+                            <p className="no-list-items-p">No tests to display</p>
+                        )}
+                        {isLoading ? (
+                            <p>Loading...</p>
+                        ) : tests.length > 2 ? (
+                            <button onClick={loadNextPageTests} className="load-button-v1">Load More</button>
+                        ) : null}
+                    </div>
+                </>
+            )}
+            
         </article>
     );
 };

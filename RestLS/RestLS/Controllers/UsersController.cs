@@ -160,6 +160,43 @@ public class UsersController : ControllerBase
         return BadRequest(result.Errors);
     }
     
+    [HttpPut]
+    [Route("allowTest/{userId}")]
+    [Authorize(Roles = ClinicRoles.Doctor)]
+    public async Task<IActionResult> AllowTest(string userId)
+    {
+        var user = await _userManager.FindByIdAsync(userId);
+
+        if (user == null)
+        {
+            return NotFound("User not found.");
+        }
+
+        user.TestTimer = DateTime.UtcNow.AddDays(1);
+
+        var result = await _userManager.UpdateAsync(user);
+
+        if (result.Succeeded)
+        {
+            return Ok("User is allowed to take test for 1 day.");
+        }
+        return BadRequest(result.Errors);
+    }
+    
+    [HttpGet]
+    [Route("testTimer")]
+    public async Task<IActionResult> GetTestTimer()
+    {
+        var user = await _userManager.FindByIdAsync(User.FindFirstValue(JwtRegisteredClaimNames.Sub));
+
+        if (user == null)
+        {
+            return NotFound("User not found.");
+        }
+
+        return Ok(new UserForTestDto(user.TestTimer));
+    }
+    
     /*[HttpPut]
     [Route("validateUser/{userId}")]
     [Authorize(Roles = ClinicRoles.Admin)] // Assuming only administrators can update user parameters

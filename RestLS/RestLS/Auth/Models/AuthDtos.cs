@@ -10,6 +10,7 @@ public record RegisterDoctorDto([Required] string UserName, [EmailAddress][Requi
 public record LoginDto(string UserName, string Password);
 public record UserDto(string Id, string UserName, string Email);
 
+public record UserForTestDto(DateTime? Timer);
 public record SuccessfulLoginDto(string AccessToken, string RefreshToken);
 
 public record RefreshAccessTokenDto(string RefreshToken);

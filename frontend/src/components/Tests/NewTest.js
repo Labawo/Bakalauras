@@ -17,33 +17,26 @@ const NewTest = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
-  const [answers, setAnswers] = useState(Array(Math.ceil(questionsData.length / 3)).fill(null));
+  const [answers, setAnswers] = useState(Array(Math.ceil(questionsData.length / 2)).fill(null));
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchUserTests = async () => {
+    const fetchUserTimer = async () => {
       try {
-        const response = await axiosPrivate.get('/tests', {
-          params: { pageNumber: 1, patientId: null },
-        });
-        const tests = response.data;
-        if (tests.length > 0) {
-          const latestTestDate = new Date(tests[0].time);
-          const currentDate = new Date();
-          const differenceInDays = Math.floor((currentDate - latestTestDate) / (1000 * 60 * 60 * 24));
-          if (differenceInDays < 7) {
+        const response = await axiosPrivate.get('/testTimer');
+        const timer = response.data;
+        if (timer != null && timer < new Date().toUTCString()) {
             navigate(-1);
             return;
-          }
         }
       } catch (error) {
-        console.error("Error fetching user tests:", error);
+        console.error("Error fetching user test timer:", error);
       }
     };
   
-    fetchUserTests();
-  }, [axiosPrivate, navigate]);
+    fetchUserTimer();
+  }, []);
 
   useEffect(() => {
     // If there are previous answers, update the form data with them
@@ -74,16 +67,17 @@ const NewTest = () => {
         return;
       }
   
-      let totalScore = 0;
+      let totalScore = "";
       for (let i = 0; i < answers.length; i++) {
         const answer = answers[i];
         if (answer) {
           for (const [questionIndex, optionIndex] of Object.entries(answer)) {
-            totalScore += questionsData[questionIndex].options[optionIndex].points;
+            totalScore += questionsData[questionIndex].options[optionIndex].index;
           }
         }
       }
       setScore(totalScore);
+      console.log(totalScore);
   
       const response = await axiosPrivate.post("/tests", { score: totalScore });
       setSuccessMessage("Test created successfully!");
@@ -96,7 +90,7 @@ const NewTest = () => {
   
 
   const handleNextPage = () => {
-    if (currentPage < Math.ceil(questionsData.length / 3) - 1) {
+    if (currentPage < Math.ceil(questionsData.length / 2) - 1) {
       setCurrentPage(prevPage => prevPage + 1);
     }
   };
@@ -113,7 +107,7 @@ const NewTest = () => {
           <h2>BDI Test</h2>
           {errorMessage && <ErrorModal show={errorMessage !== ""} onClose={() => setErrorMessage("")} message={errorMessage} />}
           <form onSubmit={handleSubmit} className="test-form">
-            {questionsData.slice(currentPage * 3, currentPage * 3 + 3).map((question, questionIndex) => (
+            {questionsData.slice(currentPage * 2, currentPage * 2 + 2).map((question, questionIndex) => (
               <div className="form-group" key={questionIndex}>
                 <label className="test-label">{question.question}</label><br />
                 <div>
@@ -142,7 +136,7 @@ const NewTest = () => {
                   <FontAwesomeIcon icon={faAngleLeft} />
                 </button>
               )}
-              {currentPage < Math.ceil(questionsData.length / 3) - 1 && (
+              {currentPage < Math.ceil(questionsData.length / 2) - 1 && (
                 <button type="button" className="next-button" onClick={handleNextPage}>
                   <FontAwesomeIcon icon={faAngleRight} />
                 </button>

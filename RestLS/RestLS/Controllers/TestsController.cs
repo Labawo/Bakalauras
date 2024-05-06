@@ -9,6 +9,7 @@ using RestLS.Data;
 using RestLS.Data.Dtos.Tests;
 using RestLS.Data.Entities;
 using RestLS.Data.Repositories;
+using RestLS.Helpers;
 
 namespace RestLS.Controllers;
 
@@ -104,14 +105,25 @@ public class TestsController : ControllerBase
         
         var test = new Test
         {
-            DepressionScore = createTestDto.DepressionScore,
-            AnxietyScore = createTestDto.AnxietyScore,
-            DepressionResults = createTestDto.DepressionResults,
-            AnxietyResults = createTestDto.AnxietyResults,
             Name = currentTimeUtc.ToString("yyyy-MM-dd HH:mm:ss") + " Test",
             OwnerId = User.FindFirstValue(JwtRegisteredClaimNames.Sub),
             Time = currentTimeUtc
         };
+
+        var depressionScore = TestScoreCounter.CalculateScore(createTestDto.Score, true);
+        var anxietyScore = TestScoreCounter.CalculateScore(createTestDto.Score, false);
+        var depressionResults = TestScoreCounter.FormResult(createTestDto.Score, true);
+        var anxietyResults = TestScoreCounter.FormResult(createTestDto.Score, false);
+
+        if (depressionScore == -1 || anxietyScore == -1 || depressionResults == null || anxietyResults == null)
+        {
+            return BadRequest();
+        }
+
+        test.DepressionScore = depressionScore;
+        test.AnxietyScore = anxietyScore;
+        test.DepressionResults = depressionResults;
+        test.AnxietyResults = anxietyResults;
 
         await _testsRepository.CreateAsync(test);
 

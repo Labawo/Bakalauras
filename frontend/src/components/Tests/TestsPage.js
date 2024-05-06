@@ -9,41 +9,27 @@ import useAuth from "../../hooks/UseAuth";
 const TestsPage = () => {
     const navigate = useNavigate();
     const axiosPrivate = useAxiosPrivate();
-    const [tests, setTests] = useState([]);
+    const [timer, setTimer] = useState([]);
     const { auth } = useAuth();
 
     const canAccess = () => {
-        const currentDate = new Date();
-        let lastTestDateTime = null;
-
-        // Find the creation date of the last test
-        if (tests.length > 0) {
-            lastTestDateTime = new Date(tests[0].Time); // Assuming createdAt contains the creation date
-        }
-
-        console.log(tests[0].time);
-
-        const differenceInDays = lastTestDateTime
-            ? Math.floor((currentDate - lastTestDateTime) / (1000 * 60 * 60 * 24))
-            : null;
-
-        console.log(differenceInDays);
-
-        return !auth.roles.includes("Doctor") && (differenceInDays === null || differenceInDays >= 7);
+        return timer != null && timer > new Date().toUTCString();
     };
 
+    const canAccessDoctor = auth.roles.includes("Doctor") && !auth.roles.includes("Admin");
+
     useEffect(() => {
-        const fetchTests = async () => {
+        const fetchTimer = async () => {
             try {
-                const response = await axiosPrivate.get('/tests');
-                setTests(response.data);
+                const response = await axiosPrivate.get('/testTimer');
+                setTimer(response.data);
             } catch (error) {
                 console.error("Error fetching tests:", error);
             }
         };
 
-        fetchTests();
-    }, [axiosPrivate]);
+        fetchTimer();
+    }, []);
 
     const createTest = () => {
         // Navigate to the Create Test page
@@ -61,7 +47,9 @@ const TestsPage = () => {
                         </button>
                     )}
                 </div>
-                <Tests />
+                {canAccessDoctor && (
+                    <Tests />
+                )}                
             </section>
             <Footer />
         </>

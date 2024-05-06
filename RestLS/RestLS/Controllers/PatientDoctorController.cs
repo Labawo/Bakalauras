@@ -44,22 +44,24 @@ public class PatientDoctorController : ControllerBase
 
     [HttpGet("getWeeklyAppointments")]
     [Authorize(Roles = ClinicRoles.Doctor)]
-    public async Task<IEnumerable<AppointmentDto>> GetManyforDoctors()
+    public async Task<IEnumerable<AppointmentForDoctorDto>> GetManyforDoctors()
     {
         var appointments = await _appointmentRepository.GetManyForDoctorAsync(User.FindFirstValue(JwtRegisteredClaimNames.Sub));
 
-        var appointmentDtos = new List<AppointmentDto>();
+        var appointmentDtos = new List<AppointmentForDoctorDto>();
         
         foreach (var appointment in appointments)
         {
             var patient = await _userManager.FindByIdAsync(appointment.PatientId);
             var patientUsername = patient?.UserName ?? "Unknown"; // If user not found, set username to "Unknown"
-
-            appointmentDtos.Add(new AppointmentDto(
+            var patientId = patient?.Id ?? "Unknown";
+            
+            appointmentDtos.Add(new AppointmentForDoctorDto(
                 appointment.ID, 
                 appointment.Time, 
-                appointment.Price, 
-                patientUsername, 
+                appointment.Price,
+                patientUsername,
+                patientId, 
                 appointment.DoctorName
             ));
         }
