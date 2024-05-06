@@ -3,6 +3,7 @@ import useAxiosPrivate from "../../hooks/UseAxiosPrivate";
 import { useNavigate, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faSearch, faEdit } from '@fortawesome/free-solid-svg-icons';
+import ConfirmationModal from "../Modals/ConfirmationModal";
 //import "./Notes.css"; // Import CSS file for styling
 
 const Notes = () => {
@@ -12,6 +13,7 @@ const Notes = () => {
     const axiosPrivate = useAxiosPrivate();
     const navigate = useNavigate();
     const location = useLocation();
+    const [deleteId, setDeleteId] = useState("");
 
     const handleInspect = (noteId) => {
         // Navigate to the InspectPage with the noteId parameter
@@ -62,6 +64,7 @@ const Notes = () => {
             setNotes(prevNotes =>
                 prevNotes.filter(note => note.id !== noteId)
             );
+            setDeleteId("");
         } catch (error) {
             console.error(`Error removing note ${noteId}:`, error);
             // Handle error as needed
@@ -101,7 +104,7 @@ const Notes = () => {
                                         </button>
                                         <button
                                             className="table-buttons-red"
-                                            onClick={() => removeNote(note.id)} // Call remove function on click
+                                            onClick={() => setDeleteId(note.id)} // Invoke deleteAppointment on click
                                         >
                                             <FontAwesomeIcon icon={faTrash} />
                                         </button>
@@ -119,6 +122,12 @@ const Notes = () => {
                     <button onClick={loadNotes} className="load-button-v1">Load More</button>
                 ) : null}
             </div>
+            <ConfirmationModal 
+                show={deleteId !== ""}
+                onClose={() => setDeleteId("")}
+                onConfirm={() => removeNote(deleteId)}
+                message={"Are you sure you want to delete note?"}
+            />
         </article>
     );
 };

@@ -3,6 +3,7 @@ import useAxiosPrivate from "../../hooks/UseAxiosPrivate";
 import useAuth from "../../hooks/UseAuth";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import ConfirmationModal from "../Modals/ConfirmationModal";
 
 const Tests = () => {
     const [tests, setTests] = useState([]);
@@ -13,6 +14,7 @@ const Tests = () => {
     const axiosPrivate = useAxiosPrivate();
     const { auth } = useAuth();
     const isAdmin = auth.roles.includes("Doctor") && !auth.roles.includes("Admin");
+    const [deleteId, setDeleteId] = useState("");
 
     const fetchTests = useCallback(async (pageNumber, patientId) => {
         try {
@@ -79,6 +81,7 @@ const Tests = () => {
             setTests(prevTests =>
                 prevTests.filter(test => test.id !== testId)
             );
+            setDeleteId("");
         } catch (error) {
             console.error(`Error removing test ${testId}:`, error);
         }
@@ -153,7 +156,7 @@ const Tests = () => {
                                                 <td>
                                                     <button
                                                         className="table-buttons-red"
-                                                        onClick={() => removeTest(test.id)}
+                                                        onClick={() => setDeleteId(test.id)} // Invoke deleteAppointment on click
                                                     >
                                                         <FontAwesomeIcon icon={faTrash} />
                                                     </button>
@@ -174,6 +177,12 @@ const Tests = () => {
                     </div>
                 </>
             )}
+            <ConfirmationModal 
+                show={deleteId !== ""}
+                onClose={() => setDeleteId("")}
+                onConfirm={() => removeTest(deleteId)}
+                message={"Are you sure you want to delete appointment?"}
+            />
             
         </article>
     );

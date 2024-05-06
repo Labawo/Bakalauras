@@ -120,7 +120,7 @@ namespace RestLS.Tests.Controllers
         }
 
         [Fact]
-        public async Task Create_ReturnsCreatedResult()
+        public async Task Create_ReturnsActionResult()
         {
             // Arrange
             var testsRepository = A.Fake<ITestsRepository>();

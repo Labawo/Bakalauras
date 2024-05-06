@@ -4,6 +4,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import useAuth from "../../hooks/UseAuth";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faSearch, faEdit } from '@fortawesome/free-solid-svg-icons';
+import ConfirmationModal from "../Modals/ConfirmationModal";
+import ErrorModal from "../Modals/ErrorModal";
 
 const Therapies = () => {
     const [therapies, setTherapies] = useState([]);
@@ -13,6 +15,8 @@ const Therapies = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const { auth } = useAuth();
+    const [deleteId, setDeleteId] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
 
     const handleInspect = (therapyId) => {
         // Navigate to the InspectPage with the therapyId parameter
@@ -76,8 +80,11 @@ const Therapies = () => {
           setTherapies(prevTherapies =>
             prevTherapies.filter(therapy => therapy.id !== therapyId)
           );
+          setDeleteId("");
         } catch (error) {
           console.error(`Error removing therapy ${therapyId}:`, error);
+          setErrorMessage("Error removing therapy.")
+          setDeleteId("");
           // Handle error as needed
         }
       };
@@ -117,9 +124,9 @@ const Therapies = () => {
                                                 >
                                                     <FontAwesomeIcon icon={faEdit} />
                                                 </button>
-                                                <button 
+                                                <button
                                                     className="table-buttons-red"
-                                                    onClick={() => removeTherapy(therapy.id)} // Call remove function on click
+                                                    onClick={() => setDeleteId(therapy.id)} // Invoke deleteAppointment on click
                                                 >
                                                     <FontAwesomeIcon icon={faTrash} />
                                                 </button>
@@ -139,6 +146,17 @@ const Therapies = () => {
                     <button onClick={loadTherapies} className="load-button-v1">Load More</button>
                 ) : null}
             </div>
+            <ErrorModal
+                show={errorMessage !== ""}
+                onClose={() => setErrorMessage("")}
+                message={errorMessage}
+            />
+            <ConfirmationModal 
+                show={deleteId !== ""}
+                onClose={() => setDeleteId("")}
+                onConfirm={() => removeTherapy(deleteId)}
+                message={"Are you sure you want to delete therapy?"}
+            />
         </article>
     );
 };

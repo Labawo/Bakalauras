@@ -5,6 +5,7 @@ import useAxiosPrivate from "./../../hooks/UseAxiosPrivate";
 import { useNavigate, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import ConfirmationModal from "../Modals/ConfirmationModal";
 
 const Editor = () => {
     const [appointments, setAppointments] = useState([]);
@@ -12,6 +13,7 @@ const Editor = () => {
     const axiosPrivate = useAxiosPrivate();
     const navigate = useNavigate();
     const location = useLocation();
+    const [deleteId, setDeleteId] = useState("");
     
     // Set end date to 7 days after the start date
     const endDate = startDate ? new Date(new Date(startDate).getTime() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0] : "";
@@ -46,6 +48,7 @@ const Editor = () => {
         try {
             await axiosPrivate.delete(`/getWeeklyAppointments/${appointmentId}`);
             setAppointments(prevAppointments => prevAppointments.filter(appointment => appointment.id !== appointmentId));
+            setDeleteId("");
         } catch (error) {
             console.error("Error deleting appointment:", error);
         }
@@ -54,6 +57,14 @@ const Editor = () => {
     const handleTestAllowance = async (patientId) => {
         try {
             await axiosPrivate.put(`/allowTest/${patientId}`);
+        } catch (error) {
+            console.error("Error alowing test for user:", error);
+        }
+    };
+
+    const handleTestRestriction = async (patientId) => {
+        try {
+            await axiosPrivate.put(`/restrictTest/${patientId}`);
         } catch (error) {
             console.error("Error alowing test for user:", error);
         }
@@ -102,9 +113,15 @@ const Editor = () => {
                                             <button className="table-buttons-green" onClick={() => handleTestAllowance(appointment.patientId)}>
                                                 Allow test
                                             </button>
-                                            <button className="table-buttons-red" onClick={() => handleDeleteAppointment(appointment.id)}>
-                                                <FontAwesomeIcon icon={faTrash} />
+                                            <button className="table-buttons-red" onClick={() => handleTestRestriction(appointment.patientId)}>
+                                                Don't Allow test
                                             </button>
+                                            <button
+                                                    className="table-buttons-red"
+                                                    onClick={() => setDeleteId(appointment.id)} // Invoke deleteAppointment on click
+                                                >
+                                                    <FontAwesomeIcon icon={faTrash} />
+                                                </button>
                                         </td>
                                     </tr>
                                 ))}
@@ -114,6 +131,12 @@ const Editor = () => {
                         <p>No appointments to display</p>
                     )}
                 </div>
+                <ConfirmationModal 
+                    show={deleteId !== ""}
+                    onClose={() => setDeleteId("")}
+                    onConfirm={() => handleDeleteAppointment(deleteId)}
+                    message={"Are you sure you want to delete appointment?"}
+                />
             </section>
             <Footer />
         </>

@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faSearch, faEdit, faCheck } from '@fortawesome/free-solid-svg-icons';
 import ErrorModal from "../Modals/ErrorModal";
 import SuccessSelectModal from "../Modals/SuccessSelectModal";
+import ConfirmationModal from "../Modals/ConfirmationModal";
 
 const Appointments = () => {
     const [appointments, setAppointments] = useState([]);
@@ -17,6 +18,7 @@ const Appointments = () => {
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
     const [startDate, setStartDate] = useState("");
+    const [deleteId, setDeleteId] = useState("");
 
     const endDate = startDate ? new Date(new Date(startDate).getTime() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0] : "";
 
@@ -77,6 +79,7 @@ const Appointments = () => {
             setAppointments(prevAppointments =>
             prevAppointments.filter(appointment => appointment.id !== appointmentId)
             );
+            setDeleteId("");
         } catch (error) {
             console.error(`Error deleting appointment ${appointmentId}:`, error);
             // Handle deletion error (e.g., show error message)
@@ -170,7 +173,7 @@ const Appointments = () => {
                                                 </button>
                                                 <button
                                                     className="table-buttons-red"
-                                                    onClick={() => deleteAppointment(appointment.id)} // Invoke deleteAppointment on click
+                                                    onClick={() => setDeleteId(appointment.id)} // Invoke deleteAppointment on click
                                                 >
                                                     <FontAwesomeIcon icon={faTrash} />
                                                 </button>
@@ -195,6 +198,12 @@ const Appointments = () => {
                 show={successMessage !== ""}
                 onClose={() => setSuccessMessage("")}
                 message={successMessage}
+            />
+            <ConfirmationModal 
+                show={deleteId !== ""}
+                onClose={() => setDeleteId("")}
+                onConfirm={() => deleteAppointment(deleteId)}
+                message={"Are you sure you want to delete appointment?"}
             />
         </article>
     );

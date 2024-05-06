@@ -183,6 +183,29 @@ public class UsersController : ControllerBase
         return BadRequest(result.Errors);
     }
     
+    [HttpPut]
+    [Route("restrictTest/{userId}")]
+    [Authorize(Roles = ClinicRoles.Doctor)]
+    public async Task<IActionResult> RestrictTest(string userId)
+    {
+        var user = await _userManager.FindByIdAsync(userId);
+
+        if (user == null)
+        {
+            return NotFound("User not found.");
+        }
+
+        user.TestTimer = DateTime.UtcNow;
+
+        var result = await _userManager.UpdateAsync(user);
+
+        if (result.Succeeded)
+        {
+            return Ok("User is allowed to take test for 1 day.");
+        }
+        return BadRequest(result.Errors);
+    }
+    
     [HttpGet]
     [Route("testTimer")]
     public async Task<IActionResult> GetTestTimer()

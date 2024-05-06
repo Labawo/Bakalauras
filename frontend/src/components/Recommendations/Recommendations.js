@@ -4,6 +4,7 @@ import { useNavigate, useLocation, useParams } from "react-router-dom";
 import useAuth from "../../hooks/UseAuth";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faSearch, faEdit } from '@fortawesome/free-solid-svg-icons';
+import ConfirmationModal from "../Modals/ConfirmationModal";
 
 const Recommendations = () => {
     const [recommendations, setRecommendations] = useState([]);
@@ -12,6 +13,7 @@ const Recommendations = () => {
     const location = useLocation();
     const { auth } = useAuth();
     const { therapyId, appointmentId } = useParams();
+    const [deleteId, setDeleteId] = useState("");
 
     const handleInspect = (recommendationId) => {
         navigate(`/therapies/${therapyId}/appointments/${appointmentId}/recommendations/${recommendationId}`);
@@ -74,6 +76,7 @@ const Recommendations = () => {
             setRecommendations(prevRecommendations =>
                 prevRecommendations.filter(recommendation => recommendation.id !== recommendationId)
             );
+            setDeleteId("");
         } catch (error) {
             console.error(`Error deleting recommendation ${recommendationId}:`, error);
         }
@@ -118,7 +121,7 @@ const Recommendations = () => {
                                                 </button>
                                                 <button
                                                     className="table-buttons-red"
-                                                    onClick={() => deleteRecommendation(recommendation.id)}
+                                                    onClick={() => setDeleteId(recommendation.id)} // Invoke deleteAppointment on click
                                                 >
                                                     <FontAwesomeIcon icon={faTrash} />
                                                 </button>
@@ -133,6 +136,12 @@ const Recommendations = () => {
                     <p className="no-list-items-p">No recommendations to display</p>
                 )}
             </div>
+            <ConfirmationModal 
+                show={deleteId !== ""}
+                onClose={() => setDeleteId("")}
+                onConfirm={() => deleteRecommendation(deleteId)}
+                message={"Are you sure you want to delete recommendation?"}
+            />
         </article>
     );
 };
