@@ -15,6 +15,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
 namespace RestLS.Tests.Controllers
 {
@@ -26,8 +27,9 @@ namespace RestLS.Tests.Controllers
             // Arrange
             var testsRepository = A.Fake<ITestsRepository>();
             var authorizationService = A.Fake<IAuthorizationService>();
+            var userManager = A.Fake<UserManager<ClinicUser>>();
 
-            var controller = new TestsController(testsRepository, authorizationService);
+            var controller = new TestsController(testsRepository, authorizationService, userManager);
             var searchParameters = new TestSearchParameters
             {
                 PageNumber = 1,
@@ -69,8 +71,9 @@ namespace RestLS.Tests.Controllers
             // Arrange
             var testsRepository = A.Fake<ITestsRepository>();
             var authorizationService = A.Fake<IAuthorizationService>();
+            var userManager = A.Fake<UserManager<ClinicUser>>();
 
-            var controller = new TestsController(testsRepository, authorizationService);
+            var controller = new TestsController(testsRepository, authorizationService, userManager);
             var testId = 1;
 
             var test = new Test { Id = testId, Name = "Therapy 1", AnxietyScore = 5, DepressionResults = "some", DepressionScore = 18, AnxietyResults = "some", OwnerId = "owner1" };
@@ -122,8 +125,9 @@ namespace RestLS.Tests.Controllers
             // Arrange
             var testsRepository = A.Fake<ITestsRepository>();
             var authorizationService = A.Fake<IAuthorizationService>();
+            var userManager = A.Fake<UserManager<ClinicUser>>();
 
-            var controller = new TestsController(testsRepository, authorizationService);
+            var controller = new TestsController(testsRepository, authorizationService, userManager);
             var createTestDto = new CreateTestDto
             (
                 "01111111111111"
@@ -162,8 +166,9 @@ namespace RestLS.Tests.Controllers
             // Arrange
             var testsRepository = A.Fake<ITestsRepository>();
             var authorizationService = A.Fake<IAuthorizationService>();
+            var userManager = A.Fake<UserManager<ClinicUser>>();
 
-            var controller = new TestsController(testsRepository, authorizationService);
+            var controller = new TestsController(testsRepository, authorizationService, userManager);
             var testId = 1; 
 
             // Mock User property

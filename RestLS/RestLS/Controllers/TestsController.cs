@@ -19,11 +19,13 @@ public class TestsController : ControllerBase
 {
     private readonly ITestsRepository _testsRepository;
     private readonly IAuthorizationService _authorizationService;
+    private readonly UserManager<ClinicUser> _userManager;
 
-    public TestsController(ITestsRepository testsRepository, IAuthorizationService authorizationService)
+    public TestsController(ITestsRepository testsRepository, IAuthorizationService authorizationService, UserManager<ClinicUser> userManager)
     {
         _testsRepository = testsRepository;
         _authorizationService = authorizationService;
+        _userManager = userManager;
     }
     
     [HttpGet(Name = "GetTests")]
@@ -93,14 +95,6 @@ public class TestsController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<TestDto>> Create(CreateTestDto createTestDto)
     {
-        var lastTest = await _testsRepository.GetLastTestForPatientAsync(User.FindFirstValue(JwtRegisteredClaimNames.Sub));
-
-        if (lastTest != null && (DateTime.UtcNow - lastTest.Time).TotalDays < 7)
-        {
-            // Last test was taken less than 7 days ago, disallow creating a new test
-            return BadRequest("A new test cannot be created within 7 days of the last test.");
-        }
-        
         DateTime currentTimeUtc = DateTime.UtcNow;
         
         var test = new Test
@@ -124,9 +118,32 @@ public class TestsController : ControllerBase
         test.AnxietyScore = anxietyScore;
         test.DepressionResults = depressionResults;
         test.AnxietyResults = anxietyResults;
+        
+        var user = await _userManager.FindByIdAsync(User.FindFirstValue(JwtRegisteredClaimNames.Sub));
 
-        await _testsRepository.CreateAsync(test);
+        if (user == null)
+        {
+            return NotFound("User not found.");
+        }
 
+        if (user.TestTimer < currentTimeUtc.AddMinutes(30))
+        {
+            return BadRequest();
+        }
+
+        user.TestTimer = DateTime.UtcNow;
+
+        var result = await _userManager.UpdateAsync(user);
+        
+        if (result.Succeeded)
+        {
+            await _testsRepository.CreateAsync(test);
+        }
+        else
+        {
+            return BadRequest("Failed to update user timer");
+        }
+      
         //201
         return Created("", new TestDto(test.Id, test.Name, test.DepressionScore, test.AnxietyScore, test.Time, test.OwnerId));
     }
