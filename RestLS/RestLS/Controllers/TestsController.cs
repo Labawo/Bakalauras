@@ -27,12 +27,13 @@ public class TestsController : ControllerBase
     }
     
     [HttpGet(Name = "GetTests")]
+    [Authorize(Roles = ClinicRoles.Doctor)]
     public async Task<IEnumerable<TestDto>> GetManyPaging([FromQuery] TestSearchParameters searchParameters, string patientId = null)
     {
         // If patientId is not provided in the query parameters, use patientId associated with the user
-        if (string.IsNullOrEmpty(patientId) || !User.IsInRole(ClinicRoles.Doctor))
+        if (string.IsNullOrEmpty(patientId) || User.IsInRole(ClinicRoles.Admin))
         {
-            patientId = User.FindFirstValue(JwtRegisteredClaimNames.Sub);
+            return new List<TestDto>();
         }
 
         var tests = await _testsRepository.GetManyAsync(searchParameters, patientId);
@@ -66,6 +67,7 @@ public class TestsController : ControllerBase
 
     
     [HttpGet("{testId}", Name = "GetTest")]
+    [Authorize(Roles = ClinicRoles.Doctor)]
     public async Task<ActionResult<TestDto>> Get(int testId)
     {
         var test = await _testsRepository.GetAsync(testId);
@@ -76,9 +78,7 @@ public class TestsController : ControllerBase
             return NotFound();
         }
         
-        var authorizationResult = await _authorizationService.AuthorizeAsync(User, test, PolicyNames.ResourceOwner);
-
-        if (!authorizationResult.Succeeded && User.IsInRole(ClinicRoles.Admin))
+        if (User.IsInRole(ClinicRoles.Admin))
         {
             return Forbid();
         }

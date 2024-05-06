@@ -57,10 +57,10 @@ public static class TestScoreCounter
                 question = "5. Worrying thoughts go through my mind:",
                 options = new []
                 { 
-                    new { text = "A great deal of the time", points = 0 },
-                    new { text = "A lot of time", points = 1 },
-                    new { text = "From time to time, but not too often", points = 2 },
-                    new { text = "Only occasionally", points = 3 }
+                    new { text = "A great deal of the time", points = 3 },
+                    new { text = "A lot of time", points = 2 },
+                    new { text = "From time to time, but not too often", points = 1 },
+                    new { text = "Only occasionally", points = 0 }
                 }
             },
             new 

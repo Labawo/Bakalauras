@@ -241,8 +241,8 @@ namespace RestLS.Tests.Controllers
             };
 
             // Act
-            var registerUserDto = new RegisterUserDto("testuser", "testuser@example.com", "Password123!");
-            var result = await controller.RegisterDoctor(registerUserDto);
+            var registerDoctorDto = new RegisterDoctorDto("testuser", "testuser@example.com", "Password123!", "Zilvinas", "Zvagulis");
+            var result = await controller.RegisterDoctor(registerDoctorDto);
 
             // Assert
             var createdAtActionResult = Assert.IsType<CreatedAtActionResult>(result);

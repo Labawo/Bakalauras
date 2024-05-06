@@ -34,15 +34,23 @@ namespace RestLS.Tests.Controllers
                 PageSize = 2 // Or any other appropriate value
             };
 
+            string userId = "patientId";
+
             var tests = new List<Test>
             {
-                new Test { Id = 1, Name = "Therapy 1", Score = 21, OwnerId = "owner1" },
-                new Test { Id = 2, Name = "Therapy 2", Score = 22, OwnerId = "owner1" }
+                new Test { Id = 1, Name = "Therapy 1", AnxietyScore = 5, DepressionResults="some", DepressionScore = 18, AnxietyResults = "some", OwnerId = userId },
+                new Test { Id = 2, Name = "Therapy 2", AnxietyScore = 5, DepressionResults="some", DepressionScore = 18, AnxietyResults = "some", OwnerId = userId }
             };
 
-            A.CallTo(() => testsRepository.GetManyAsync(searchParameters, null)).Returns(Task.FromResult(new PagedList<Test>(tests, 2, 1, 2)));
+            A.CallTo(() => testsRepository.GetManyAsync(searchParameters, userId)).Returns(Task.FromResult(new PagedList<Test>(tests, 2, 1, 2)));
 
-            var httpContext = new DefaultHttpContext();
+            var user = new ClaimsPrincipal(new ClaimsIdentity(new Claim[]
+            {
+                new Claim(ClaimTypes.NameIdentifier, "userId"), // Simulate user ID
+                new Claim(ClaimTypes.Role, ClinicRoles.Doctor) // Simulate user role
+            }));
+
+            var httpContext = new DefaultHttpContext() { User = user };
             httpContext.Response.Headers.Add("Pagination", "your_pagination_value");
             controller.ControllerContext = new ControllerContext
             {
@@ -50,7 +58,7 @@ namespace RestLS.Tests.Controllers
             };
 
             // Act
-            var result = await controller.GetManyPaging(searchParameters);
+            var result = await controller.GetManyPaging(searchParameters, userId);
 
             Assert.Equal(2, result.Count());
         }
@@ -65,11 +73,18 @@ namespace RestLS.Tests.Controllers
             var controller = new TestsController(testsRepository, authorizationService);
             var testId = 1;
 
-            var test = new Test { Id = testId, Name = "Therapy 1", Score = 21, OwnerId = "owner1" };
+            var test = new Test { Id = testId, Name = "Therapy 1", AnxietyScore = 5, DepressionResults = "some", DepressionScore = 18, AnxietyResults = "some", OwnerId = "owner1" };
 
-            var authorizationResult = AuthorizationResult.Success(); // Simulate successful authorization
-            A.CallTo(() => authorizationService.AuthorizeAsync(A<ClaimsPrincipal>._, A<object>._, A<string>._))
-                .Returns(authorizationResult);
+            var user = new ClaimsPrincipal(new ClaimsIdentity(new Claim[]
+            {
+                new Claim(ClaimTypes.NameIdentifier, "userId"), // Simulate user ID
+                new Claim(ClaimTypes.Role, ClinicRoles.Doctor) // Simulate user role
+            }));
+
+            controller.ControllerContext = new ControllerContext()
+            {
+                HttpContext = new DefaultHttpContext() { User = user }
+            };
 
             A.CallTo(() => testsRepository.GetAsync(testId)).Returns(Task.FromResult(test));
 
@@ -111,7 +126,7 @@ namespace RestLS.Tests.Controllers
             var controller = new TestsController(testsRepository, authorizationService);
             var createTestDto = new CreateTestDto
             (
-                23
+                "01111111111111"
             );
 
             // Mock User property
@@ -167,7 +182,10 @@ namespace RestLS.Tests.Controllers
             {
                 Id = testId,
                 Name = "Existing Therapy",
-                Score = 20,
+                DepressionScore = 20,
+                AnxietyScore = 20,
+                DepressionResults = "some",
+                AnxietyResults = "some",
                 Time = DateTime.UtcNow.AddHours(1),
                 OwnerId = "ownerId" // Assuming ownerId for testing
             };

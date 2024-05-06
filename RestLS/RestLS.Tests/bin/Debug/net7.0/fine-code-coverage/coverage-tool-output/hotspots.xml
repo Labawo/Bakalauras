@@ -1,2 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Hotspots />
+<Hotspots>
+  <Hotspot>
+    <Assembly>RestLS</Assembly>
+    <Class>RestLS.Helpers.TestScoreCounter</Class>
+    <MethodName>FormResult(...)</MethodName>
+    <ShortName />
+    <Line>210</Line>
+    <FileIndex>0</FileIndex>
+    <Metrics>
+      <Metric>
+        <Name>Cyclomatic complexity</Name>
+        <Exceeded>true</Exceeded>
+        <Value>38</Value>
+      </Metric>
+    </Metrics>
+  </Hotspot>
+</Hotspots>
