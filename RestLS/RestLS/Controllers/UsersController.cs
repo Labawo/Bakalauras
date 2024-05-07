@@ -161,6 +161,27 @@ public class UsersController : ControllerBase
     }
     
     [HttpPut]
+    [Route("resetPassword")]
+    [Authorize(Roles = ClinicRoles.Admin + "," + ClinicRoles.Doctor + "," + ClinicRoles.Patient)]
+    public async Task<IActionResult> ResetPassword(ResetPasswordDto resetPasswordDto)
+    {
+        var user = await _userManager.FindByIdAsync(User.FindFirstValue(JwtRegisteredClaimNames.Sub));
+
+        if (user == null)
+        {
+            return NotFound("User not found.");
+        }
+
+        var result = await _userManager.ChangePasswordAsync(user, resetPasswordDto.CurrentPassword, resetPasswordDto.NewPassword);
+
+        if (result.Succeeded)
+        {
+            return Ok("Password changed successfully.");
+        }
+        return BadRequest(result.Errors);
+    }
+    
+    [HttpPut]
     [Route("allowTest/{userId}")]
     [Authorize(Roles = ClinicRoles.Doctor)]
     public async Task<IActionResult> AllowTest(string userId)

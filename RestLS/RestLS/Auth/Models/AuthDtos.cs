@@ -15,4 +15,6 @@ public record SuccessfulLoginDto(string AccessToken, string RefreshToken);
 
 public record RefreshAccessTokenDto(string RefreshToken);
 
-public record ChangePasswordDto(string NewPassword);
+public record ChangePasswordDto([Required]string NewPassword);
+
+public record ResetPasswordDto([Required] string CurrentPassword, [Required] string NewPassword);

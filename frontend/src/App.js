@@ -1,6 +1,7 @@
 import Register from './components/Authorization/Register';
 import RegisterDoctor from './components/Authorization/RegisterDoctor';
 import Login from './components/Authorization/Login';
+import ResetPassword from './components/Authorization/ResetPassword';
 import Home from './components/Main/Home';
 import Layout from './components/Main/Layout';
 import Editor from './components/Appointments/Editor';
@@ -57,6 +58,7 @@ function App() {
         <Route element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Editor]} />}>
           <Route path="/" element={<Home />} />
           <Route path="/therapies" element={<TherapiesPage />} />
+          <Route path="/resetPassword" element={<ResetPassword />} />
           <Route path="/myAppointments" element={<MyAppointmentsPage />} />
           <Route path="/therapies/:therapyId" element={<TherapyPage />} />
           <Route path="/therapies/:therapyId/appointments" element={<AppointmentsPage />} />
