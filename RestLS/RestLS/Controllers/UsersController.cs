@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.JsonWebTokens;
 using RestLS.Auth.Models;
 using RestLS.Data.Dtos.Appoitments;
+using RestLS.Data.Entities;
 using RestLS.Data.Repositories;
 
 namespace RestLS.Controllers;
@@ -16,11 +17,13 @@ public class UsersController : ControllerBase
 {
     private readonly UserManager<ClinicUser> _userManager;
     private readonly IAppointmentsRepository _appointmentRepository;
+    private readonly INotificationsRepository _notificationsRepository;
     
-    public UsersController(UserManager<ClinicUser> userManager, IAppointmentsRepository appointmentRepository)
+    public UsersController(UserManager<ClinicUser> userManager, IAppointmentsRepository appointmentRepository, INotificationsRepository notificationsRepository)
     {
         _userManager = userManager;
         _appointmentRepository = appointmentRepository;
+        _notificationsRepository = notificationsRepository;
     }
     
     [HttpGet]
@@ -199,6 +202,15 @@ public class UsersController : ControllerBase
 
         if (result.Succeeded)
         {
+            var notification = new Notification
+            {
+                Content = "You can do tests until : " + user.TestTimer,
+                Time = DateTime.UtcNow,
+                OwnerId = userId
+            };
+
+            await _notificationsRepository.CreateAsync(notification);
+            
             return Ok("User is allowed to take test for 1 day.");
         }
         return BadRequest(result.Errors);
@@ -222,7 +234,16 @@ public class UsersController : ControllerBase
 
         if (result.Succeeded)
         {
-            return Ok("User is allowed to take test for 1 day.");
+            var notification = new Notification
+            {
+                Content = "Are not allowed to do tests anymore.",
+                Time = DateTime.UtcNow,
+                OwnerId = userId
+            };
+
+            await _notificationsRepository.CreateAsync(notification);
+            
+            return Ok("User is not allowed to take test.");
         }
         return BadRequest(result.Errors);
     }

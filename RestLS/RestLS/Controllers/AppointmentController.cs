@@ -63,6 +63,22 @@ public class AppointmentController : ControllerBase
         var appointment = await _appointmentRepository.GetAsync(therapy.Id, appoitmentId);
         if (appointment == null) return NotFound();
 
+        if (appointment.PatientId != null)
+        {
+            if (User.IsInRole(ClinicRoles.Admin) || User.IsInRole(ClinicRoles.Patient))
+            {
+                return Forbid();
+            } 
+        
+            var authorizationResult = await _authorizationService.AuthorizeAsync(User, therapy, PolicyNames.ResourceOwner);
+
+            if (!authorizationResult.Succeeded)
+            {
+                return Forbid();
+            }
+        }
+        
+
         return Ok(new AppointmentDto(appointment.ID, appointment.Time, appointment.Price, appointment.PatientId, appointment.DoctorName));
     }
 

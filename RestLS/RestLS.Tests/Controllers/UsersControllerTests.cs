@@ -26,8 +26,9 @@ namespace RestLS.Tests.Controllers
             // Arrange
             var appointmentsRepository = A.Fake<IAppointmentsRepository>();
             var userManager = A.Fake<UserManager<ClinicUser>>();
+            var notificationsRepository = A.Fake<INotificationsRepository>();
 
-            var controller = new UsersController(userManager, appointmentsRepository);
+            var controller = new UsersController(userManager, appointmentsRepository, notificationsRepository);
                         
             var patients = new List<ClinicUser>
             {
@@ -74,8 +75,9 @@ namespace RestLS.Tests.Controllers
             // Arrange
             var appointmentsRepository = A.Fake<IAppointmentsRepository>();
             var userManager = A.Fake<UserManager<ClinicUser>>();
+            var notificationsRepository = A.Fake<INotificationsRepository>();
 
-            var controller = new UsersController(userManager, appointmentsRepository);
+            var controller = new UsersController(userManager, appointmentsRepository, notificationsRepository);
 
             var patients = new List<ClinicUser>
             {
@@ -112,8 +114,9 @@ namespace RestLS.Tests.Controllers
             // Arrange
             var appointmentsRepository = A.Fake<IAppointmentsRepository>();
             var userManager = A.Fake<UserManager<ClinicUser>>();
+            var notificationsRepository = A.Fake<INotificationsRepository>();
 
-            var controller = new UsersController(userManager, appointmentsRepository);
+            var controller = new UsersController(userManager, appointmentsRepository, notificationsRepository);
 
             var patients = new List<ClinicUser>
             {
@@ -150,8 +153,9 @@ namespace RestLS.Tests.Controllers
             // Arrange
             var appointmentsRepository = A.Fake<IAppointmentsRepository>();
             var userManager = A.Fake<UserManager<ClinicUser>>();
+            var notificationsRepository = A.Fake<INotificationsRepository>();
 
-            var controller = new UsersController(userManager, appointmentsRepository);
+            var controller = new UsersController(userManager, appointmentsRepository, notificationsRepository);
 
             var clinicUser = new ClinicUser { Id = "userId1", UserName = "user1", Email = "user1@email.com" };
                         
@@ -183,8 +187,9 @@ namespace RestLS.Tests.Controllers
             // Arrange
             var appointmentsRepository = A.Fake<IAppointmentsRepository>();
             var userManager = A.Fake<UserManager<ClinicUser>>();
+            var notificationsRepository = A.Fake<INotificationsRepository>();
 
-            var controller = new UsersController(userManager, appointmentsRepository);
+            var controller = new UsersController(userManager, appointmentsRepository, notificationsRepository);
 
             var clinicUser = new ClinicUser { Id = "userId1", UserName = "user1", Email = "user1@email.com" };
 
@@ -220,8 +225,9 @@ namespace RestLS.Tests.Controllers
             // Arrange
             var appointmentsRepository = A.Fake<IAppointmentsRepository>();
             var userManager = A.Fake<UserManager<ClinicUser>>();
+            var notificationsRepository = A.Fake<INotificationsRepository>();
 
-            var controller = new UsersController(userManager, appointmentsRepository);
+            var controller = new UsersController(userManager, appointmentsRepository, notificationsRepository);
 
             ClinicUser nullUser = null;
 

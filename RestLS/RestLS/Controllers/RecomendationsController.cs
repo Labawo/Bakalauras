@@ -39,8 +39,6 @@ public class RecomendationsController : ControllerBase
         var appointment = await _appointmentRepository.GetAsync(therapy.Id, appointmentId);
         if (appointment == null) return new List<RecomendationDto>();
         
-        
-        
         var authorizationResult = await _authorizationService.AuthorizeAsync(User, therapy, PolicyNames.ResourceOwner);
 
         if (!authorizationResult.Succeeded && User.IsInRole(ClinicRoles.Admin))
