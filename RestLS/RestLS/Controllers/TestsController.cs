@@ -104,10 +104,12 @@ public class TestsController : ControllerBase
             Time = currentTimeUtc
         };
 
-        var depressionScore = TestScoreCounter.CalculateScore(createTestDto.Score, true);
-        var anxietyScore = TestScoreCounter.CalculateScore(createTestDto.Score, false);
-        var depressionResults = TestScoreCounter.FormResult(createTestDto.Score, true);
-        var anxietyResults = TestScoreCounter.FormResult(createTestDto.Score, false);
+        var finalResults = TestScoreCounter.GetFinalResult(createTestDto.Score);
+
+        var depressionScore = finalResults[0].Score;
+        var anxietyScore = finalResults[1].Score;
+        var depressionResults = finalResults[0].Result;
+        var anxietyResults = finalResults[1].Result;
 
         if (depressionScore == -1 || anxietyScore == -1 || depressionResults == null || anxietyResults == null)
         {

@@ -6,7 +6,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
-const AppointmentsPage = () => {
+const MyAppointments = () => {
 
     const [appointments, setAppointments] = useState([]);
     const [recommendations, setRecommendations] = useState([]);
@@ -162,4 +162,4 @@ const AppointmentsPage = () => {
     )
 }
 
-export default AppointmentsPage
+export default MyAppointments

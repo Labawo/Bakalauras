@@ -166,8 +166,25 @@ public static class TestScoreCounter
 
         return questionsData;
     }
+
+    public static List<FinalResult> GetFinalResult(string score)
+    {
+        List<FinalResult> result = new List<FinalResult>();
+
+        var questionsData = SetTest();
+        
+        var depressionScore = CalculateScore(score, true, questionsData);
+        var anxietyScore = CalculateScore(score, false, questionsData);
+        var depressionResults = FormResult(score, true, questionsData);
+        var anxietyResults = FormResult(score, false, questionsData);
+        
+        result.Add(new FinalResult(depressionScore, depressionResults));
+        result.Add(new FinalResult(anxietyScore, anxietyResults));
+
+        return result;
+    }
     
-    public static int CalculateScore(string score, bool isDepression)
+    private static int CalculateScore(string score, bool isDepression, object[] questionsData)
     {
         int result = -1;
 
@@ -187,7 +204,6 @@ public static class TestScoreCounter
             }
 
             int sum = 0;
-            var questionsData = SetTest();
 
             for (int i = 0, j = isDepression ? 1 : 0; i < intArray.Length; i++, j+=2)
             {
@@ -206,7 +222,7 @@ public static class TestScoreCounter
         return result;
     }
     
-    public static string FormResult(string score, bool isDepression)
+    private static string FormResult(string score, bool isDepression, object[] questionsData)
     {
         string result = "";
         
@@ -226,7 +242,6 @@ public static class TestScoreCounter
             }
 
             int sum = 0;
-            var questionsData = SetTest();
 
             for (int i = 0, j = isDepression ? 1 : 0; i < intArray.Length; i++, j+=2)
             {
