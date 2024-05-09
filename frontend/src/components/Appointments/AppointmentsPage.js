@@ -1,6 +1,7 @@
 import Appintments from './Appointments';
 import { useParams } from 'react-router-dom';
 import NavBar from "../Main/NavBar";
+import Title from "../Main/Title";
 import Footer from "../Main/Footer";
 
 const AppointmentsPage = () => {
@@ -8,6 +9,7 @@ const AppointmentsPage = () => {
 
     return (
         <>
+            <Title />
             <NavBar />
             <section>
                 <Appintments therapyId = {therapyId} />

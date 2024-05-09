@@ -3,6 +3,7 @@ import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icon
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useAxiosPrivate from "../../hooks/UseAxiosPrivate";
 import NavBar from "../Main/NavBar";
+import Title from "../Main/Title";
 import Footer from "../Main/Footer";
 import SuccessSelectModal from "../Modals/SuccessSelectModal";
 
@@ -94,6 +95,7 @@ const ResetPassword = () => {
 
     return (
         <>
+            <Title />
             <NavBar />
             <section>                  
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>

@@ -71,7 +71,7 @@ const Login = () => {
             <div className='login-div'>
                 <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                 <h1>Sign In</h1>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} className = "input_form">
                     <label htmlFor="username">Username:</label>
                     <input
                         type="text"
@@ -81,6 +81,7 @@ const Login = () => {
                         onChange={(e) => setUser(e.target.value)}
                         value={user}
                         required
+                        className="input-field"
                     />
 
                     <label htmlFor="password">Password:</label>
@@ -91,11 +92,11 @@ const Login = () => {
                         value={pwd}
                         required
                     />
-                    <button>Sign In</button>
+                    <button className="auth_button">Sign In</button>
                 </form>
             </div>
             
-            <p>
+            <p className='login_footer'>
                 Need an Account?<br />
                 <span className="line">
                     <Link to="/register">Sign Up</Link>

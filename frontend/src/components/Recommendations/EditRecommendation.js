@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import useAxiosPrivate from "../../hooks/UseAxiosPrivate";
 import NavBar from "../Main/NavBar";
+import Title from "../Main/Title";
 import Footer from "../Main/Footer";
 import { useParams, useNavigate } from "react-router-dom";
 import SuccessModal from "../Modals/SuccessModal";
@@ -72,6 +73,7 @@ const EditRecommendation = () => {
 
   return (
     <>
+      <Title />
       <NavBar />
       <section>       
         <div className="form-container">

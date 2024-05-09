@@ -109,7 +109,7 @@ const Register = () => {
                 <section>
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                     <h1>Register</h1>
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit} className = "input_form">
                         <label htmlFor="username">
                             Username:
                             <FontAwesomeIcon icon={faCheck} className={validName ? "valid" : "hide"} />
@@ -208,9 +208,9 @@ const Register = () => {
                             Must match the first password input field.
                         </p>
 
-                        <button disabled={!validName || !validPwd ||!validEmail || !validMatch ? true : false}>Sign Up</button>
+                        <button disabled={!validName || !validPwd ||!validEmail || !validMatch ? true : false} className="auth_button">Sign Up</button>
                     </form>
-                    <p>
+                    <p className='login_footer'>
                         Already registered?<br />
                         <span className="line">
                             <Link to="/">Sign In</Link>

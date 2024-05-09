@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useAxiosPrivate from "../../hooks/UseAxiosPrivate";
 import NavBar from "../Main/NavBar";
 import Footer from "../Main/Footer";
+import Title from "../Main/Title";
 import SuccessSelectModal from "../Modals/SuccessSelectModal";
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
@@ -132,6 +133,7 @@ const RegisterDoctor = () => {
 
     return (
         <>
+            <Title />
             <NavBar />
             <section>                  
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>

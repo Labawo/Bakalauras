@@ -3,6 +3,7 @@ import Tests from './Tests';
 import { useNavigate } from 'react-router-dom';
 import NavBar from "../Main/NavBar";
 import Footer from "../Main/Footer";
+import Title from "../Main/Title";
 import useAxiosPrivate from "../../hooks/UseAxiosPrivate";
 import useAuth from "../../hooks/UseAuth";
 
@@ -38,6 +39,7 @@ const TestsPage = () => {
 
     return (
         <>
+            <Title />
             <NavBar />
             <section>                
                 <div className="page-header">

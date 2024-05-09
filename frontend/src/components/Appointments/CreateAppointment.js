@@ -3,6 +3,7 @@ import useAxiosPrivate from "../../hooks/UseAxiosPrivate";
 import { useParams } from "react-router-dom";
 import NavBar from "../Main/NavBar";
 import Footer from "../Main/Footer";
+import Title from "../Main/Title";
 import SuccessModal from "../Modals/SuccessModal";
 import ErrorModal from "../Modals/ErrorModal";
 
@@ -91,6 +92,7 @@ const CreateAppointment = () => {
 
   return (
     <>
+      <Title />
       <NavBar />
       <section>       
         <div className="form-container">

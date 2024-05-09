@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import useAxiosPrivate from "../../hooks/UseAxiosPrivate";
 import NavBar from "../Main/NavBar";
+import Title from "../Main/Title";
 import Footer from "../Main/Footer";
 import useAuth from "../../hooks/UseAuth";
 
@@ -37,6 +38,7 @@ const AppointmentPage = () => {
 
     return (
         <>
+            <Title />
             <NavBar />
             <section>               
                 <h2>Appointment Details</h2>

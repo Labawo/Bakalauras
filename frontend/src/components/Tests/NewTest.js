@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import useAxiosPrivate from "../../hooks/UseAxiosPrivate";
 import NavBar from "../Main/NavBar";
 import Footer from "../Main/Footer";
+import Title from "../Main/Title";
 import useAuth from "../../hooks/UseAuth";
 import questionsData from "./questionsData";
 import RedirectModal from "../Modals/RedirectModal"; // Import the RedirectModal component
@@ -101,6 +102,7 @@ const NewTest = () => {
 
   return (
     <>
+      <Title />
       <NavBar />
       <section>        
         <div className="form-container">

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "./../Main/NavBar";
+import Title from "./../Main/Title";
 import Footer from "./../Main/Footer";
 import useAxiosPrivate from "./../../hooks/UseAxiosPrivate";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -80,6 +81,7 @@ const Editor = () => {
 
     return (
         <>
+            <Title />
             <NavBar />
             <section>               
                 <div className="table-container">

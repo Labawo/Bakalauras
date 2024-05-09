@@ -14,12 +14,17 @@ html {
 
 body {
     min-height: 100vh;
-    background-color: #003135;
+    /*background-color: #003135;*/
+    background-color: black;
 }
 
 h1, h2 {
     text-align: center;
     margin-bottom: 20px;
+}
+
+h3 {
+    text-align: center;
 }
 
 .App {
@@ -39,7 +44,8 @@ section {
     flex-direction: column;
     justify-content: flex-start;
     padding: 2rem; /* Adjust padding as needed */
-    background-color: #afdde5;
+    /*background-color: #afdde5;*/
+    background-color: white;
 }
 
 form {
@@ -69,6 +75,7 @@ textarea {
   padding: 0.25rem;
   border-radius: 0.5rem;
   margin: 10px;
+  width: 50%;
 }
 
 label,
@@ -138,9 +145,17 @@ li {
 
 .navbar, .footer {
     position: relative;
-    width: 100%; /* Ensure navbar spans the entire width of the section */
+    width: 100%; 
     background-color: #0fa4af;
-    padding-top: 5px;
+    padding-top: 15px;
+    padding-bottom: 0;
+    color:white;
+    font-size: 15px;
+    font-weight: 250;
+}
+
+.navbar {
+    background-color: #0fa4afe0;
 }
 
 .footer {
@@ -148,7 +163,29 @@ li {
     text-align: center;
     padding-top: 10px;
     padding-bottom: 15px;
-    color: white;
+    color: black;
+    font-style: italic;
+}
+
+.title_div {
+    background-color: #0fa4af;
+    width: 100%;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid black;
+    font-style: italic;
+    font-size: 25px;
+}
+
+.title_div h3 {
+    text-align: center;
+}
+
+.shortcut-div {
+    margin-left: 20px;
+    background-color: white;
+    border: 2px solid black;
+    width: 150px;
 }
 
 .menu-icon {
@@ -164,31 +201,51 @@ li {
     color: white;
 }
 
-.navbar-links {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    left:0;
-    top: 100%; /* Position the navbar links below the menu icon */
-    background-color: white;   
-    width: 200px; /* Adjust width as needed */
-    transition: transform 0.3s ease-in-out;
-    transform: translateY(0);
-    z-index: 10;
-    border: 1px solid #ccc; /* Add border for styling */
-    padding: 5px;
-    border-radius: 5px;
+.nav-link-span {
+    border-right: 1px solid black;
+    flex: 1;
+    min-width: 0;
+    max-width: 12%;
+    text-align: center;
+}
+
+.navbar-allign {
+    margin-top: 0px;
 }
 
 .nav-link {
-    text-decoration: none; /* Removes underline */
-    color: inherit; /* Inherit color from parent */
-    transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    padding-right: 5px;
+    padding-left: 5px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 16px;
 }
 
-.nav-link:hover {
+.navbar-links {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 0px;
+    margin-top: -15px;
+}
+
+.nav-link-span:hover {
     background-color: black; /* Background color on hover */
+    cursor: pointer;
+    transition: background-color 0.3s, border 0.3s;
+}
+
+.nav-link-span:hover .nav-link {
     color: white; /* Text color on hover */
+    transition: color 0.3s;
+}
+
+.active-span .nav-link{
+    color: white;
+    background-color: black;   
 }
 
 .hidden {
@@ -197,18 +254,20 @@ li {
 
 .logout-div {
     float: right;
-    margin-top: 0;
+    margin-top: 5px;
 }
 
 .logout-btn {
+    text-align: center;
     background-color: red;
     margin-top: 0;
-    font-size: 15px;
+    font-size: 14px;
     cursor: pointer;
     border:none;
-    border-radius: 50%;
     padding-left: 15px;
     padding-right: 15px;
+    width: 70%;
+    padding-bottom: 5px;
 }
 
 .logout-btn:hover{
@@ -291,6 +350,7 @@ li {
     cursor: pointer;
     color: white;
     transition: background-color 0.3s; /* Add transition for smooth hover effect */
+    width: 10%;
 }
 
 .related-button {
@@ -305,6 +365,7 @@ li {
     padding-left: 13px;
     padding-right: 13px;
     transition: background-color 0.3s; /* Add transition for smooth hover effect */
+    width: 10%;
 }
 
 .table-buttons-green {
@@ -313,6 +374,7 @@ li {
     cursor: pointer;
     color: white;
     transition: background-color 0.3s; /* Add transition for smooth hover effect */
+    width: 10%;
 }
 
 .table-buttons-gold {
@@ -320,12 +382,14 @@ li {
     border: none;
     cursor: pointer;
     transition: background-color 0.3s; /* Add transition for smooth hover effect */
+    width: 10%;
 }
 
 /* Hover styles */
 .create-button-v1:hover,
 .table-buttons-blue:hover,
-.related-button:hover {
+.related-button:hover,
+.auth_button:hover {
     background-color: #28559e; /* Darker shade of blue */
 }
 
@@ -391,6 +455,22 @@ li {
     margin-top: 20px;
 }
 
+.input_form {
+    margin-left: 32.5%;
+}
+
+.login_footer {
+    text-align: center;
+}
+
+.auth_button {
+    background-color: #3066be;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    color: white;
+    font-weight: bold;
+}
+
 @media screen and (max-width: 768px) { /* Adjust the max-width according to your preference */
     section {
         max-width: 100%;
@@ -413,4 +493,12 @@ li {
         margin-left: 0;
     }
 
+    .nav-link-span {
+        display: block;
+        max-width: 50%;
+    }
+
+    .navbar-links {
+        display: block;
+    }
 }
