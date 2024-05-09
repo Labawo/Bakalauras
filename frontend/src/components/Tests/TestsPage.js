@@ -14,7 +14,10 @@ const TestsPage = () => {
     const { auth } = useAuth();
 
     const canAccess = () => {
-        return timer != null && timer > new Date().toUTCString();
+        if (timer.timer == null) return false;
+        
+        console.log(new Date(timer.timer) > new Date());
+        return new Date(timer.timer) > new Date();
     };
 
     const canAccessDoctor = auth.roles.includes("Doctor") && !auth.roles.includes("Admin");
@@ -44,7 +47,7 @@ const TestsPage = () => {
             <section>                
                 <div className="page-header">
                     {canAccess() && (
-                        <button onClick={createTest} className="create-button-v1"> {/* Button to create a test */}
+                        <button onClick={createTest} className="create-button-v1">
                             New Test
                         </button>
                     )}

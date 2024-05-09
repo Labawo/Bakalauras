@@ -138,7 +138,7 @@ const RegisterDoctor = () => {
             <section>                  
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                     <h1>Register</h1>
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit} className = "input_form">
                         <label htmlFor="username">
                             Username:
                             <FontAwesomeIcon icon={faCheck} className={validName ? "valid" : "hide"} />
@@ -288,7 +288,7 @@ const RegisterDoctor = () => {
                             Must match the first password input field.
                         </p>
 
-                        <button disabled={!validName || !validPwd ||!validEmail || !validMatch ? true : false}>Register doctor</button>
+                        <button disabled={!validName || !validPwd ||!validEmail || !validMatch ? true : false} className="auth_button">Register doctor</button>
                     </form>
                 </section>
                 <SuccessSelectModal

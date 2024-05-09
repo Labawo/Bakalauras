@@ -104,7 +104,7 @@ const EditAppointment = () => {
       <section>       
         <div className="form-container">
           <h2>Edit Appointment</h2>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="input_form">
             <div className="form-group">
               <label htmlFor="date">Date:</label><br />
               <input
@@ -142,7 +142,7 @@ const EditAppointment = () => {
                 className="input-field"
               />
             </div>
-            <button type="submit" className="submit-button">
+            <button type="submit" className="auth_button">
               Update
             </button>
           </form>

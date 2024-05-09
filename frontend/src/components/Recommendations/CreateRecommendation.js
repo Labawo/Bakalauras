@@ -62,7 +62,7 @@ const CreateRecommendation = () => {
       <section>        
         <div className="form-container">
           <h2>Create new recommendation</h2>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="input_form">
             <div className="form-group">
               <label htmlFor="description">Description:</label><br />
               <textarea
@@ -75,7 +75,7 @@ const CreateRecommendation = () => {
                 className="textarea-field"
               />
             </div>
-            <button type="submit" className="submit-button">
+            <button type="submit" className="auth_button">
               Create
             </button>
           </form>

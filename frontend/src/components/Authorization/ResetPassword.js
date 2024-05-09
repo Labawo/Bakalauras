@@ -100,7 +100,7 @@ const ResetPassword = () => {
             <section>                  
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                     <h1>Register</h1>
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit} className = "input_form">
                         <label htmlFor="currentpassword">
                             Current password:
                             <FontAwesomeIcon icon={faCheck} className={validcPwd ? "valid" : "hide"} />
@@ -169,7 +169,7 @@ const ResetPassword = () => {
                             Must match the first password input field.
                         </p>
 
-                        <button disabled={!validcPwd || !validPwd || !validMatch ? true : false}>Change Password</button>
+                        <button disabled={!validcPwd || !validPwd || !validMatch ? true : false} className="auth_button">Change Password</button>
                     </form>
                 </section>
                 <SuccessSelectModal

@@ -255,23 +255,41 @@ li {
 .logout-div {
     float: right;
     margin-top: 5px;
+    width: 10%;
 }
 
 .logout-btn {
+    border: 1px solid black;
     text-align: center;
     background-color: red;
     margin-top: 0;
     font-size: 14px;
     cursor: pointer;
-    border:none;
     padding-left: 15px;
     padding-right: 15px;
-    width: 70%;
+    width: 35%;
     padding-bottom: 5px;
 }
 
 .logout-btn:hover{
     background-color: rgb(190, 2, 2);
+}
+
+.password-btn {
+    border: 1px solid black;
+    text-align: center;
+    background-color: #ffd700;
+    margin-top: 0;
+    font-size: 14px;
+    cursor: pointer;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 35%;
+    padding-bottom: 5px;
+}
+
+.password-btn:hover{
+    background-color: #cca000;
 }
 
 .table-container h2{
@@ -343,14 +361,35 @@ li {
 }
 
 .create-button-v1,
-.table-buttons-blue,
-.related-button {
+.related-button,
+.load-button-v1, 
+.therapy-create-btn {
     background-color: #3066be;
     border: none;
     cursor: pointer;
     color: white;
     transition: background-color 0.3s; /* Add transition for smooth hover effect */
     width: 10%;
+}
+
+.table-buttons-blue {
+    background-color: #3066be;
+    border: none;
+    cursor: pointer;
+    color: white;
+    padding-left: 15px;
+    padding-right: 35px;
+    transition: background-color 0.3s; /* Add transition for smooth hover effect */
+    width: 0;
+}
+
+.create-button-v1,
+.related-button {
+    width: 20%;
+}
+
+.therapy-create-btn {
+    width: 90%;
 }
 
 .related-button {
@@ -362,10 +401,10 @@ li {
     border: none;
     cursor: pointer;
     color: white;
-    padding-left: 13px;
-    padding-right: 13px;
+    padding-left: 15px;
+    padding-right: 30px;
     transition: background-color 0.3s; /* Add transition for smooth hover effect */
-    width: 10%;
+    width: 0;
 }
 
 .table-buttons-green {
@@ -373,23 +412,41 @@ li {
     border: none;
     cursor: pointer;
     color: white;
+    padding-left: 15px;
+    padding-right: 30px;
     transition: background-color 0.3s; /* Add transition for smooth hover effect */
-    width: 10%;
+    width: 0;
 }
 
 .table-buttons-gold {
     background-color: #ffd700;
     border: none;
     cursor: pointer;
+    padding-left: 15px;
+    padding-right: 30px;
     transition: background-color 0.3s; /* Add transition for smooth hover effect */
-    width: 10%;
+    width: 0;
+}
+
+.allowance {
+    width: 15%;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.restriction {
+    width: 15%;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 /* Hover styles */
 .create-button-v1:hover,
 .table-buttons-blue:hover,
 .related-button:hover,
-.auth_button:hover {
+.auth_button:hover,
+.load-button-v1:hover,
+.therapy-create-btn:hover {
     background-color: #28559e; /* Darker shade of blue */
 }
 
@@ -415,6 +472,11 @@ li {
 
 .no-list-items-p {
     margin-top: 10%;
+    text-align: center;
+}
+
+.no-list-items-np {
+    text-align: center;
 }
 
 .test-score-p {
@@ -428,31 +490,58 @@ li {
 }
 
 .notification-item {
-    background-color: white;
-    width: 25%;
+    background-color: rgba(255, 255, 255, 0.54);
     padding: 10px;
     border-radius: 25px;
+    border: 1px solid black;
+    font-size: 18px;
+    width: 75%;
+    margin: 5px auto;
 }
 
 .close-button {
-    background-color: white;
+    background-color: none;
     border: none;
     font-weight: bold;
     float: right;
     padding-top: 0;
     margin-top: 0;
-    font-size: 25px;
+    font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: color 0.3s;
+    width: 10%;
+}
+
+.close-button {
+    background-color: white;
+    
 }
 
 .close-button:hover {
     color: #d32f2f;
-    transition: background-color 0.3s;
+    transition: color 0.3s;
 }
 
 .notification-header {
-    margin-top: 20px;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    background-color: #0fa4af;
+    padding-top: 30px;
+    padding-bottom: 20px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid black;
+}
+
+.notifications-container {
+    width: 100%;
+    align-items: center;
+}
+
+.notificationsdiv-container {
+    width: 50%;
+    margin: 0 auto;
+    border: 1px solid black;
+    border-radius: 25px;
 }
 
 .input_form {
@@ -469,6 +558,54 @@ li {
     transition: background-color 0.3s;
     color: white;
     font-weight: bold;
+}
+
+.greeting-note {
+    text-align: center;
+    font-size: 35px;
+    padding-bottom: 40px;   
+}
+
+.therapy-list {
+}
+
+.therapy-row {
+    border: 1px solid black;
+    width: 47.5%;
+    margin: 1.25%;
+    display: inline-block;
+}
+
+.therapy-create-btn-div {
+    padding-bottom: 0px;
+    width: 25%;
+    margin-left: auto;
+}
+
+.therapy-create-btn {
+    margin-right: auto;
+}
+
+.therapy-info-name {
+    background-color: #0fa4af;
+    border-bottom: 1px solid black;
+    padding-left: 10px;
+    font-size: 35px;
+    font-weight: bold;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.therapy-info {
+    font-style: italic;
+    padding-left: 15px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.therapy-actions {
+    width: 62.5%;
+    margin-left: auto;
 }
 
 @media screen and (max-width: 768px) { /* Adjust the max-width according to your preference */
@@ -500,5 +637,33 @@ li {
 
     .navbar-links {
         display: block;
+    }
+
+    .logout-div {
+        width: 40%;
+    }
+
+    .therapy-row {
+        border: 1px solid black;
+        width: 95%;
+        margin: 10px;
+        display: inline-block;
+    }
+
+    .therapy-create-btn-div {
+        width: 100%;
+    }
+
+    .therapy-actions {
+        width: 90%;
+        margin-left: auto;
+    }
+
+    .allowance {
+        width: 90%;
+    }
+    
+    .restriction {
+        width: 90%;
     }
 }

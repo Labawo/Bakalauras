@@ -7,6 +7,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import ConfirmationModal from "../Modals/ConfirmationModal";
+import SuccessSelectModal from "../Modals/SuccessSelectModal";
 
 const Editor = () => {
     const [appointments, setAppointments] = useState([]);
@@ -14,6 +15,7 @@ const Editor = () => {
     const axiosPrivate = useAxiosPrivate();
     const navigate = useNavigate();
     const location = useLocation();
+    const [successMessage, setSuccessMessage] = useState("");
     const [deleteId, setDeleteId] = useState("");
     
     // Set end date to 7 days after the start date
@@ -55,17 +57,19 @@ const Editor = () => {
         }
     };
 
-    const handleTestAllowance = async (patientId) => {
+    const handleTestAllowance = async (patientId, patientName) => {
         try {
             await axiosPrivate.put(`/allowTest/${patientId}`);
+            setSuccessMessage(`You allowed tests for patient ${patientName}`);
         } catch (error) {
             console.error("Error alowing test for user:", error);
         }
     };
 
-    const handleTestRestriction = async (patientId) => {
+    const handleTestRestriction = async (patientId, patientName) => {
         try {
             await axiosPrivate.put(`/restrictTest/${patientId}`);
+            setSuccessMessage(`You restricted tests for patient ${patientName}`);
         } catch (error) {
             console.error("Error alowing test for user:", error);
         }
@@ -112,11 +116,11 @@ const Editor = () => {
                                         <td>{appointment?.time.split('T')[1].slice(0, 5)}</td>
                                         <td>{appointment?.patientName}</td>
                                         <td>
-                                            <button className="table-buttons-green" onClick={() => handleTestAllowance(appointment.patientId)}>
+                                            <button className="table-buttons-green allowance" onClick={() => handleTestAllowance(appointment.patientId, appointment.patientName)}>
                                                 Allow test
                                             </button>
-                                            <button className="table-buttons-red" onClick={() => handleTestRestriction(appointment.patientId)}>
-                                                Don't Allow test
+                                            <button className="table-buttons-red restriction" onClick={() => handleTestRestriction(appointment.patientId, appointment.patientName)}>
+                                                Restrict test
                                             </button>
                                             <button
                                                     className="table-buttons-red"
@@ -138,6 +142,11 @@ const Editor = () => {
                     onClose={() => setDeleteId("")}
                     onConfirm={() => handleDeleteAppointment(deleteId)}
                     message={"Are you sure you want to delete appointment?"}
+                />
+                <SuccessSelectModal
+                    show={successMessage !== ""}
+                    onClose={() => setSuccessMessage("")}
+                    message={successMessage}
                 />
             </section>
             <Footer />

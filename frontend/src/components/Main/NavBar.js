@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import AuthContext from "../../context/AuthProvider";
 import useAuth from "../../hooks/UseAuth";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSignOutAlt, faBars } from '@fortawesome/free-solid-svg-icons';
+import { faSignOutAlt, faKey } from '@fortawesome/free-solid-svg-icons';
 
 const NavBar = () => {
 
@@ -22,6 +22,10 @@ const NavBar = () => {
         navigate('/login');
     }
 
+    const changePassword = async () => {
+        navigate('/resetPassword');
+    }
+
     const canAccessAdmin = auth.roles.includes("Admin");
     const canAccessDoctor = auth.roles.includes("Doctor") && !auth.roles.includes("Admin");
     const canAccessPatient = auth.roles.includes("Patient") && !auth.roles.includes("Admin");
@@ -31,9 +35,16 @@ const NavBar = () => {
         <div className="navbar">
             <div className="navbar-allign">
                 <div className="logout-div">
-                    <button onClick={logout} className="logout-btn">
-                        <FontAwesomeIcon icon={faSignOutAlt} />
-                    </button>
+                    <span>
+                        <button onClick={changePassword} className="password-btn">
+                            <FontAwesomeIcon icon={faKey} />
+                        </button>
+                    </span>
+                    <span>
+                        <button onClick={logout} className="logout-btn">
+                            <FontAwesomeIcon icon={faSignOutAlt} />
+                        </button>
+                    </span>             
                 </div>   
 
                 <div className="navbar-links">

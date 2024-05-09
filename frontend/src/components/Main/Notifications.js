@@ -56,32 +56,34 @@ const Notifications = () => {
     return (
         <article className="notifications-container">
             <div className="table-container">
-                <h3 className="notification-header">What is new for you.</h3>
-                {notifications.length ? (
-                    <div className="notification-list">
-                        {notifications.map((notification, i) => (
-                            <div className="notification-item" key={i}>
-                                <div className="close-button-div">
-                                    <button
-                                            className="close-button"
-                                            onClick={() => removeNotification(notification.id)}
-                                        >
-                                            x
-                                    </button>
-                                </div>                               
-                                <div className="notification-content">{notification?.content}</div>
-                                
-                            </div>
-                        ))}
-                    </div>
-                ) : (
-                    <p className="no-list-items-p">There is nothing new.</p>
-                )}
-                {isLoading ? (
-                    <p>Loading...</p>
-                ) : notifications.length > 4 ? (
-                    <button onClick={loadNotifications} className="load-button-v1">Load More</button>
-                ) : null}
+                <div className="notificationsdiv-container">
+                    <h3 className="notification-header">What is new for you:</h3>
+                    {notifications.length ? (
+                        <div className="notification-list">
+                            {notifications.map((notification, i) => (
+                                <div className="notification-item" key={i}>
+                                    <div className="close-button-div">
+                                        <button
+                                                className="close-button"
+                                                onClick={() => removeNotification(notification.id)}
+                                            >
+                                                x
+                                        </button>
+                                    </div>                               
+                                    <div className="notification-content">{notification?.content}</div>
+                                    
+                                </div>
+                            ))}
+                        </div>
+                    ) : (
+                        <p className="no-list-items-np">There is nothing new.</p>
+                    )}
+                    {isLoading ? (
+                        <p>Loading...</p>
+                    ) : notifications.length > 4 ? (
+                        <button onClick={loadNotifications} className="load-button-v1">Load More</button>
+                    ) : null}
+                </div>                
             </div>
         </article>
     );

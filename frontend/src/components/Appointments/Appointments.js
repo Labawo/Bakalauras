@@ -107,7 +107,7 @@ const Appointments = () => {
         }
     };
 
-    const canSelectAppointment = auth.roles.includes("Patient");
+    const canSelectAppointment = auth.roles.includes("Patient") && !auth.roles.includes("Admin");
 
     const filteredAppointments = appointments.filter(appointment => {
         if (startDate) {

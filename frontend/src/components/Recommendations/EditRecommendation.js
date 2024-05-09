@@ -78,7 +78,7 @@ const EditRecommendation = () => {
       <section>       
         <div className="form-container">
           <h2>Edit recommendation</h2>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="input_form">
             <div className="form-group">
               <label htmlFor="description">Description:</label><br />
               <textarea
@@ -90,7 +90,7 @@ const EditRecommendation = () => {
                 className="textarea-field"
               />
             </div>
-            <button type="submit" className="submit-button">
+            <button type="submit" className="auth_button">
               Update
             </button>
           </form>

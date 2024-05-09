@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import useAxiosPrivate from "../../hooks/UseAxiosPrivate";
 import NavBar from "../Main/NavBar";
+import Title from "../Main/Title";
 import Footer from "../Main/Footer";
 import useAuth from "../../hooks/UseAuth";
 import SuccessModal from "../Modals/SuccessModal";
@@ -64,6 +65,7 @@ const CreateNote = () => {
 
   return (
     <>
+      <Title />
       <NavBar />
       <section>
         <div className="form-container">

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import useAxiosPrivate from "../../hooks/UseAxiosPrivate";
 import NavBar from "../Main/NavBar";
 import Footer from "../Main/Footer";
@@ -17,6 +18,7 @@ const CreateTherapy = () => {
 
   const [doctors, setDoctors] = useState([]);
   const axiosPrivate = useAxiosPrivate();
+  const navigate = useNavigate();
   const { auth } = useAuth();
   const canAccessAdmin = auth.roles.includes("Admin");
 
@@ -36,6 +38,7 @@ const CreateTherapy = () => {
       setDoctors(response.data);
     } catch (error) {
       console.error("Error fetching doctors:", error);
+      navigate(-1);
     }
   };
 
@@ -102,7 +105,7 @@ const CreateTherapy = () => {
       <section>
         <div className="form-container">
           <h2>Create New Therapy</h2>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className = "input_form">
             <div className="form-group">
               <label htmlFor="name">Name:</label><br />
               <input
@@ -164,7 +167,7 @@ const CreateTherapy = () => {
               />
               {errors.image && <span className="error-message">{errors.image}</span>}
             </div>
-            <button type="submit" className="submit-button">
+            <button type="submit" className="auth_button">
               Create
             </button>
           </form>

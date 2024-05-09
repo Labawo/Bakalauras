@@ -94,49 +94,47 @@ const Therapies = () => {
             <div className="table-container">
                 <h2 className="list-headers">Therapies List</h2>
                 {canAccessDoctor && (
-                    <button onClick={createTherapy} className="create-button-v1"> Create Therapy </button>
+                    <div className="therapy-create-btn-div">
+                        <button onClick={createTherapy} className="therapy-create-btn"> Create Therapy </button>
+                    </div>                    
                 )}
                 {therapies.length ? (
-                    <table className="my-table">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Description</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {therapies.map((therapy, i) => (
-                                <tr key={i}>
-                                    <td>{therapy?.name}</td>
-                                    <td>{therapy?.description.length > 20 ? therapy?.description[20] : therapy?.description}...</td>
-                                    <td>
-                                        <button 
-                                            className="table-buttons-blue"
-                                            onClick={() => handleInspect(therapy.id)}
-                                        >
-                                            <FontAwesomeIcon icon={faSearch} />
-                                        </button>
-                                        {canAccessAdminOrCreator(therapy) && (
-                                            <>
-                                                <button 
-                                                    className="table-buttons-blue"
-                                                    onClick={() => updateTherapy(therapy.id)}
-                                                >
-                                                    <FontAwesomeIcon icon={faEdit} />
-                                                </button>
-                                                <button
-                                                    className="table-buttons-red"
-                                                    onClick={() => setDeleteId(therapy.id)} // Invoke deleteAppointment on click
-                                                >
-                                                    <FontAwesomeIcon icon={faTrash} />
-                                                </button>
-                                            </>
-                                        )}
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                    <div className="therapy-list">
+                        {therapies.map((therapy, i) => (
+                            <div key={i} className="therapy-row">
+                                <div className="therapy-info-name">
+                                    <p>{therapy?.name}</p> 
+                                </div>
+                                <div className="therapy-info">
+                                    <p>{therapy?.description}</p>
+                                </div>
+                                <div className="therapy-actions">
+                                    <button 
+                                        className="table-buttons-blue"
+                                        onClick={() => handleInspect(therapy.id)}
+                                    >
+                                        <FontAwesomeIcon icon={faSearch} />
+                                    </button>
+                                    {canAccessAdminOrCreator(therapy) && (
+                                        <>
+                                            <button 
+                                                className="table-buttons-blue"
+                                                onClick={() => updateTherapy(therapy.id)}
+                                            >
+                                                <FontAwesomeIcon icon={faEdit} />
+                                            </button>
+                                            <button
+                                                className="table-buttons-red"
+                                                onClick={() => setDeleteId(therapy.id)}
+                                            >
+                                                <FontAwesomeIcon icon={faTrash} />
+                                            </button>
+                                        </>
+                                    )}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 ) : (
                     <p className="no-list-items-p">No therapies to display</p>
                 )}
