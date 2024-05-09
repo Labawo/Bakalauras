@@ -74,7 +74,7 @@ const EditNote = () => {
       <section>        
         <div className="form-container">
           <h2>Edit Note</h2>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className = "input_form">
             <div className="form-group">
               <label htmlFor="content">Content:</label><br />
               <textarea
@@ -86,7 +86,7 @@ const EditNote = () => {
                 className="textarea-field"
               />
             </div>
-            <button type="submit" className="submit-button">
+            <button type="submit" className="auth_button">
               Update
             </button>
           </form>
