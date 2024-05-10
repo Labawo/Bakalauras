@@ -93,6 +93,7 @@ public class RecomendationsController : ControllerBase
 
         var recomendation = new Recomendation{Description = recomendationDto.Description};
         recomendation.Appoint = appointment;
+        recomendation.AppointmentId = appointment.ID;
         recomendation.RecomendationDate = DateTime.UtcNow;
 
         await _recomendationsRepository.CreateAsync(recomendation);

@@ -28,6 +28,9 @@ const AppointmentPage = () => {
                 if (error.response && error.response.status === 404) {
                     navigate(-1);
                 }
+                if (error.response && error.response.status === 400) {
+                    navigate(-1);
+                }
             }
         };
 

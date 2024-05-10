@@ -5,7 +5,7 @@ import Footer from "./../Main/Footer";
 import useAxiosPrivate from "./../../hooks/UseAxiosPrivate";
 import { useNavigate, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faSearch } from '@fortawesome/free-solid-svg-icons';
 import ConfirmationModal from "../Modals/ConfirmationModal";
 import SuccessSelectModal from "../Modals/SuccessSelectModal";
 
@@ -75,6 +75,11 @@ const Editor = () => {
         }
     };
 
+    const handleInspect = (therapyId, appintmentId) => {
+        // Navigate to the InspectPage with the therapyId parameter
+        navigate(`/therapies/${therapyId}/appointments/${appintmentId}`);
+    };
+
     const filteredAppointments = appointments.filter(appointment => {
         if (startDate) {
             const appointmentDate = new Date(appointment.time.split('T')[0]);
@@ -116,6 +121,12 @@ const Editor = () => {
                                         <td>{appointment?.time.split('T')[1].slice(0, 5)}</td>
                                         <td>{appointment?.patientName}</td>
                                         <td>
+                                            <button 
+                                                className="table-buttons-blue"
+                                                onClick={() => handleInspect(appointment.therapyId, appointment.id)}
+                                            >
+                                                <FontAwesomeIcon icon={faSearch} />
+                                            </button>
                                             <button className="table-buttons-green allowance" onClick={() => handleTestAllowance(appointment.patientId, appointment.patientName)}>
                                                 Allow test
                                             </button>

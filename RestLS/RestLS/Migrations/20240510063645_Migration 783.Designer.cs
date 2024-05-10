@@ -11,8 +11,8 @@ using RestLS.Data;
 namespace RestLS.Migrations
 {
     [DbContext(typeof(LS_DbContext))]
-    [Migration("20240505192042_Migration 781")]
-    partial class Migration781
+    [Migration("20240510063645_Migration 783")]
+    partial class Migration783
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

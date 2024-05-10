@@ -17,7 +17,7 @@
     background-color: white;
     padding-top: 20px;
     border-radius: 50px;
-    max-width: 500px; /* Set maximum width to prevent it from stretching too wide */
+    max-width: 50%; /* Set maximum width to prevent it from stretching too wide */
     margin: 0 auto; /* Center the form horizontally */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
 }
@@ -61,8 +61,13 @@ input[type="radio"] {
 
 /* Style form labels */
 .test-label {
-    margin: 50%;
+    margin-left: 20px;
     padding-bottom: 20px;
     font-weight: bold; /* Make labels bold */
-    margin-bottom: 10px; /* Add margin below labels */
+    margin-bottom: 20px; /* Add margin below labels */
 }
+
+.options-div {
+    padding: 15px;
+}
+

@@ -106,7 +106,7 @@ const Therapies = () => {
                                     <p>{therapy?.name}</p> 
                                 </div>
                                 <div className="therapy-info">
-                                    <p>{therapy?.description}</p>
+                                    <p>Psych. {therapy?.description}</p>
                                 </div>
                                 <div className="therapy-actions">
                                     <button 

@@ -1,5 +1,5 @@
 /* Responsive modal */
-.modal {
+.inspect {
     display: none;
     position: fixed;
     z-index: 1000; /* Set a high z-index value */
@@ -15,13 +15,13 @@
     display: block;
 }
 
-.modal-content {
+.inspect-content {
     background-color: #fefefe;
     margin: 10% auto;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;
-    max-width: 400px;
+    max-width: 80%;
     border-radius: 8px;
 }
 
@@ -43,17 +43,12 @@
 }
 
 /* Modal buttons */
-.modal-buttons {
+.inspect-buttons {
     text-align: center;
     margin-top: 20px;
-    display: flex;
 }
 
-.single {
-    display: block;
-}
-
-.modal-buttons button {
+.inspect-buttons button {
     padding: 10px 20px;
     margin: 0 10px;
     cursor: pointer;
@@ -91,6 +86,7 @@
 .confirmation-header {
     color: #ffd700;
 }
+
 
 /* Responsive button */
 @media only screen and (max-width: 600px) {

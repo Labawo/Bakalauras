@@ -15,8 +15,7 @@ const RedirectModal = ({ show, message, buttonText, score, destination }) => {
       <div className="modal-content">
         <h2 className="success-header"><FiCheckCircle /> Success!</h2>
         <p>{message}</p>
-        <p>Your score: {score}</p>
-        <div className="modal-buttons">
+        <div className="modal-buttons single">
           <button className="primary-button" onClick={handleNavigation}>
             {buttonText}
           </button>

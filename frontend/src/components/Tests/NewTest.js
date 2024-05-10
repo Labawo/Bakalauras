@@ -112,7 +112,7 @@ const NewTest = () => {
             {questionsData.slice(currentPage * 2, currentPage * 2 + 2).map((question, questionIndex) => (
               <div className="form-group" key={questionIndex}>
                 <label className="test-label">{question.question}</label><br />
-                <div>
+                <div className="options-div">
                   {question.options.map((option, optionIndex) => (
                     <div key={optionIndex}>
                       <label>
@@ -153,7 +153,6 @@ const NewTest = () => {
             onClose={() => setSuccessMessage("")} 
             message={successMessage} 
             buttonText="Go to tests"
-            score={score}
             destination="/tests" />
         </div>
       </section>

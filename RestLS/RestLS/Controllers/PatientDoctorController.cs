@@ -62,7 +62,7 @@ public class PatientDoctorController : ControllerBase
                 appointment.Price,
                 patientUsername,
                 patientId, 
-                appointment.DoctorName
+                appointment.Therapy.Id
             ));
         }
         

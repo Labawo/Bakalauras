@@ -112,19 +112,7 @@ const EditTherapy = () => {
       <section>     
         <div className="form-container">
           <h2>Edit Therapy</h2>
-          <form onSubmit={handleSubmit} className="input_form">
-            <div className="form-group">
-              <label htmlFor="name">Name:</label><br />
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleInputChange}
-                required
-                className="input-field"
-              />
-            </div>
+          <form onSubmit={handleSubmit} className="input_form">            
             <div className="form-group">
               <label htmlFor="description">Description:</label><br />
               <textarea

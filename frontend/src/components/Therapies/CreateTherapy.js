@@ -107,17 +107,22 @@ const CreateTherapy = () => {
           <h2>Create New Therapy</h2>
           <form onSubmit={handleSubmit} className = "input_form">
             <div className="form-group">
-              <label htmlFor="name">Name:</label><br />
-              <input
-                type="text"
+            <label htmlFor="name">Type:</label><br />
+              <select
                 id="name"
                 name="name"
                 value={formData.name}
                 onChange={handleInputChange}
-                placeholder="Enter Therapy Name"
                 required
-                className="input-field"
-              />
+                className="select-field"
+              >
+                <option value="">Select Therapy Type</option>
+                <option value="Consulting">Consulting</option>
+                <option value="Couples consulting">Couples consulting</option>
+                <option value="Music therapy">Music therapy</option>
+                <option value="Film therapy">Film therapy</option>
+                <option value="Psychoeducation">Psychoeducation</option>
+              </select>
               {errors.name && <span className="error-message">{errors.name}</span>}
             </div>
             <div className="form-group">

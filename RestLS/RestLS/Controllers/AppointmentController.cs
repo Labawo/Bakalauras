@@ -98,6 +98,7 @@ public class AppointmentController : ControllerBase
         
         var appoitment = new Appointment{Price = appoitmentDto.Price};
         appoitment.Therapy = therapy;
+        appoitment.therapyId = therapy.Id;
         var userId = therapy.OwnerId;
         var doctor = await _userManager.FindByIdAsync(userId);
 

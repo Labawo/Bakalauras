@@ -2,8 +2,10 @@ import React, { useState, useEffect, useCallback } from "react";
 import useAxiosPrivate from "../../hooks/UseAxiosPrivate";
 import useAuth from "../../hooks/UseAuth";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faSearch } from '@fortawesome/free-solid-svg-icons';
 import ConfirmationModal from "../Modals/ConfirmationModal";
+import ErrorModal from "../Modals/ErrorModal";
+import TestInspect from "./TestInspect";
 
 const Tests = () => {
     const [tests, setTests] = useState([]);
@@ -11,10 +13,13 @@ const Tests = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [patients, setPatients] = useState([]);
     const [selectedPatientId, setSelectedPatientId] = useState(""); // State for selected patient
+    const [selectedPatientUsername, setSelectedPatientUsername] = useState("");
     const axiosPrivate = useAxiosPrivate();
     const { auth } = useAuth();
     const isAdmin = auth.roles.includes("Doctor") && !auth.roles.includes("Admin");
     const [deleteId, setDeleteId] = useState("");
+    const [test, setTest] = useState(null);
+    const [errorMessage, setErrorMessage] = useState("");
 
     const fetchTests = useCallback(async (pageNumber, patientId) => {
         try {
@@ -47,7 +52,6 @@ const Tests = () => {
 
     useEffect(() => {
         if (selectedPatientId) {
-            console.log(selectedPatientId);
             setPage(2); // Reset page number
             setTests([]); // Clear existing tests
             loadTests(); // Load tests for the selected patient
@@ -63,6 +67,18 @@ const Tests = () => {
         setTests(data); // Replace existing tests with the new ones
         setIsLoading(false);
     }, [fetchTests, isLoading, selectedPatientId]);
+
+    const handleInspect = async (testId) => {
+        try {
+            const response = await axiosPrivate.get(`/tests/${testId}`);
+            console.log(response.data.resource)
+            setTest(response.data.resource);
+        } catch (error) {
+            console.error(error);
+            // Handle error, e.g., show a message or navigate to an error page
+            setErrorMessage("Failed to inspect.")
+        }
+    };
     
     const loadNextPageTests = useCallback(async () => {
         if (isLoading) return;
@@ -88,8 +104,10 @@ const Tests = () => {
     };
 
     const handlePatientSelect = (e) => {
-        const newPatientId = e.target.value;
-        setSelectedPatientId(newPatientId);
+        const selectedOption = e.target.value;
+        const [patientId, username] = selectedOption.split('|'); // Assuming the value is in the format "patientId|username"
+        setSelectedPatientId(patientId);
+        setSelectedPatientUsername(username);
     }; 
 
     return (
@@ -102,7 +120,7 @@ const Tests = () => {
                         <select id="patientSelect" onChange={handlePatientSelect}>
                             <option value="">Select Patient</option>
                             {patients.map((patient) => (
-                                <option key={patient.id} value={patient.id}>
+                                <option key={patient.id} value={`${patient.id}|${patient.userName}`}>
                                     {patient.userName}
                                 </option>
                             ))}
@@ -116,7 +134,6 @@ const Tests = () => {
                                 <thead>
                                     <tr>
                                         <th>Name</th>
-                                        {isAdmin && <th>Action</th>}
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -125,6 +142,12 @@ const Tests = () => {
                                             <td>{test?.name}</td>
                                             {isAdmin && (
                                                 <td>
+                                                <button 
+                                                    className="table-buttons-blue"
+                                                    onClick={() => handleInspect(test.id)}
+                                                >
+                                                    <FontAwesomeIcon icon={faSearch} />
+                                                </button>
                                                     <button
                                                         className="table-buttons-red"
                                                         onClick={() => setDeleteId(test.id)} // Invoke deleteAppointment on click
@@ -154,7 +177,18 @@ const Tests = () => {
                 onConfirm={() => removeTest(deleteId)}
                 message={"Are you sure you want to delete appointment?"}
             />
-            
+            <ErrorModal
+                show={errorMessage !== ""}
+                onClose={() => setErrorMessage("")}
+                message={errorMessage}
+            />
+            <TestInspect
+                user= {selectedPatientUsername}
+                show={test !== null}
+                onClose={() => setTest(null)}
+                message={test ? test.depressionScore : ""}
+                message2={test ? test.anxietyScore : ""}
+            />
         </article>
     );
 };

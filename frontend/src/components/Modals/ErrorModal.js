@@ -12,7 +12,7 @@ const ErrorModal = ({ show, onClose, message }) => {
         
         <h2 className="error-header"><FiAlertTriangle /> Error</h2>
         <p>{message}</p>
-        <div className="modal-buttons">
+        <div className="modal-buttons single">
           <button className="primary-button" onClick={onClose}>OK</button>
         </div>
       </div>

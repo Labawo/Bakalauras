@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace RestLS.Migrations
 {
     /// <inheritdoc />
-    public partial class Migration781 : Migration
+    public partial class Migration783 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

@@ -608,6 +608,20 @@ li {
     margin-left: auto;
 }
 
+tbody tr {
+    border-bottom: 1px solid black;
+}
+
+.center-testp {
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 5px;
+}
+
+.had-test-create-btn {
+    margin-right: 40%;
+}
+
 @media screen and (max-width: 768px) { /* Adjust the max-width according to your preference */
     section {
         max-width: 100%;
