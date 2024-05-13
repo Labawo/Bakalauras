@@ -9,6 +9,7 @@
     font-size: 30px;
     cursor: pointer; /* Add pointer cursor on hover */
     padding: 10px 20px; /* Add padding for better spacing */
+    width: 25%;
 }
 
 .test-form {
@@ -20,6 +21,7 @@
     max-width: 50%; /* Set maximum width to prevent it from stretching too wide */
     margin: 0 auto; /* Center the form horizontally */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+    text-align: center;
 }
 
 input[type="radio"] {
@@ -39,7 +41,7 @@ input[type="radio"] {
 .pagination-buttons {
     margin-top: 20px;
     display: flex;
-    justify-content: left;
+    justify-content: center;
 }
 
 /* Style the submit button */
@@ -61,13 +63,23 @@ input[type="radio"] {
 
 /* Style form labels */
 .test-label {
-    margin-left: 20px;
-    padding-bottom: 20px;
     font-weight: bold; /* Make labels bold */
     margin-bottom: 20px; /* Add margin below labels */
+    width: 100%;
 }
 
 .options-div {
-    padding: 15px;
+    width: 50%;
+    text-align: left;
+    margin: auto;
+}
+
+.test-label-div {
+    width: 60%;
+    margin: auto;
+    text-align: left;
+    padding-left: 20px;
+    padding-bottom: 20px;
+    padding-top: 15px;
 }
 

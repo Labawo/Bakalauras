@@ -133,7 +133,7 @@ const MyAppointments = () => {
                                         ) : (<tr>
                                             <th>Description</th>
                                             <th>Date</th>
-                                            <th>Time</th>
+                                            
                                         </tr>
                                     )}
                                     </thead>
@@ -148,7 +148,7 @@ const MyAppointments = () => {
                                                 <tr key={index}>
                                                     <td>{recommendation.description}</td>
                                                     <td>{recommendation?.time.split('T')[0]}</td>
-                                                    <td>{recommendation?.time.split('T')[1].slice(0, 5)}</td>
+                                                    
                                                 </tr>
                                             ))
                                         )}

@@ -95,6 +95,7 @@ li {
     font-size: 0.75rem;
     border-radius: 0.5rem;
     background: #000;
+    width: 51%;
     color: #fff;
     padding: 0.25rem;
     position: relative;
@@ -130,6 +131,8 @@ li {
     font-weight: bold;
     padding: 0.5rem;
     margin-bottom: 0.5rem;
+    width: 35%;
+    margin: auto;
 }
 
 .line {
@@ -256,6 +259,7 @@ li {
 
 .logout-div {
     float: right;
+    text-align: right;
     margin-top: 5px;
     width: 10%;
 }
@@ -332,6 +336,7 @@ li {
     background-color: white;
     padding: 20px;
     border-radius: 8px;
+    width: 30%;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -348,6 +353,13 @@ li {
     right: 10px;
     font-size: 20px;
 }
+
+.recommendations-table {
+    border: 1px solid black;
+    width: 100%;
+    text-align: left;
+}
+
 
 .table-container {
     overflow-x: auto; /* Enable horizontal scrolling on small screens */

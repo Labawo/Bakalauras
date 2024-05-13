@@ -175,7 +175,7 @@ const Tests = () => {
                 show={deleteId !== ""}
                 onClose={() => setDeleteId("")}
                 onConfirm={() => removeTest(deleteId)}
-                message={"Are you sure you want to delete appointment?"}
+                message={"Are you sure you want to delete test?"}
             />
             <ErrorModal
                 show={errorMessage !== ""}

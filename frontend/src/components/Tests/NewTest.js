@@ -111,7 +111,9 @@ const NewTest = () => {
           <form onSubmit={handleSubmit} className="test-form">
             {questionsData.slice(currentPage * 2, currentPage * 2 + 2).map((question, questionIndex) => (
               <div className="form-group" key={questionIndex}>
-                <label className="test-label">{question.question}</label><br />
+                <div className="test-label-div">
+                 <label className="test-label">{question.question}</label><br />
+                </div>                
                 <div className="options-div">
                   {question.options.map((option, optionIndex) => (
                     <div key={optionIndex}>
