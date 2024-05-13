@@ -99,7 +99,7 @@ const ResetPassword = () => {
             <NavBar />
             <section>                  
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-                    <h1>Register</h1>
+                    <h1>Change password</h1>
                     <form onSubmit={handleSubmit} className = "input_form">
                         <label htmlFor="currentpassword">
                             Current password:

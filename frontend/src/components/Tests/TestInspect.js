@@ -29,9 +29,11 @@ const TestInspect = ({ show, onClose, message, message2, user }) => {
           &times;
         </span>
         <h2>{user} results.</h2>
-        <div>{renderMessageLines(message)}</div>
-        <br />
-        <div>{renderMessageLines(message2)}</div>
+        <div className="results-div-written">
+          <div className="anx-div">{renderMessageLines(message)}</div>
+          <br />
+          <div className="dep-div">{renderMessageLines(message2)}</div>
+        </div>
         <div className="inspect-buttons">
           <button className="secondary-button" onClick={onClose}>Close</button>
         </div>
