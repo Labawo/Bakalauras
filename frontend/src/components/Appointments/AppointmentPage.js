@@ -24,7 +24,6 @@ const AppointmentPage = () => {
                 console.log(response.data);
             } catch (error) {
                 console.error(error);
-                // Handle error, e.g., show a message or navigate to an error page
                 if (error.response && error.response.status === 404) {
                     navigate(-1);
                 }
@@ -51,7 +50,6 @@ const AppointmentPage = () => {
                         <p>Time: {appointment.time.split('T')[1].slice(0, -3)}</p>
                         <p>Price: {appointment.price} €</p>
                         <p>Responsible doctor: {appointment.doctroName}</p>
-                        {/* Add other details you want to display */}
                         {isPastAppointment && canAccessDoctor && (
                             <Link to={`/therapies/${therapyId}/appointments/${appointmentId}/recommendations`}>
                                 <button className="related-button">See Recommendations</button>

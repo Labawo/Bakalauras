@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import useAxiosPrivate from "../../hooks/UseAxiosPrivate";
 import { useNavigate, useLocation, useParams  } from "react-router-dom";
 import useAuth from "../../hooks/UseAuth";
@@ -23,7 +23,6 @@ const Appointments = () => {
     const endDate = startDate ? new Date(new Date(startDate).getTime() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0] : "";
 
     const handleInspect = (appintmentId) => {
-        // Navigate to the InspectPage with the therapyId parameter
         navigate(`/therapies/${therapyId}/appointments/${appintmentId}`);
     };
 
@@ -44,8 +43,6 @@ const Appointments = () => {
                         signal: controller.signal,
                     }),
                 ]);
-                //console.log(therapyResponse.data.resource);
-                //console.log(appointmentsResponse.data);
                 isMounted && setTherapy(therapyResponse.data.resource);
                 isMounted && setAppointments(appointmentsResponse.data);
             } catch (err) {
@@ -63,26 +60,22 @@ const Appointments = () => {
     }, [axiosPrivate, navigate, location, therapyId]);
 
     const createAppointment = () => {
-        // Navigate to the Create Therapy page
         navigate(`/therapies/${therapyId}/appointments/createAppointment`);
     };
 
     const updateAppointment = (apponitmentId) => {
-        // Navigate to the Create Therapy page
         navigate(`/therapies/${therapyId}/appointments/${apponitmentId}/editAppointment`);
     };
 
     const deleteAppointment = async (appointmentId) => {
         try {
             await axiosPrivate.delete(`/therapies/${therapyId}/appointments/${appointmentId}`);
-            // Remove the deleted appointment from the state
             setAppointments(prevAppointments =>
             prevAppointments.filter(appointment => appointment.id !== appointmentId)
             );
             setDeleteId("");
         } catch (error) {
             console.error(`Error deleting appointment ${appointmentId}:`, error);
-            // Handle deletion error (e.g., show error message)
         }
     };
 
@@ -93,15 +86,12 @@ const Appointments = () => {
     const selectAppointment = async (appointmentId) => {
         try {
             await axiosPrivate.put(`/therapies/${therapyId}/appointments/${appointmentId}/select`);
-            // Logic for handling after selection if needed
             const updatedAppointmentsResponse = await axiosPrivate.get(`/therapies/${therapyId}/appointments`);
             setAppointments(updatedAppointmentsResponse.data);
             setSuccessMessage("Appointment selected successfully");
         } catch (error) {
             console.error(`Error selecting appointment ${appointmentId}:`, error);
-            // Handle selection error (e.g., show error message)
             if (error.response.status === 409) {
-            // Handle Conflict error
                 setErrorMessage("Appointment time overlaps or you have reached appointment limit.");
             }
         }
@@ -173,7 +163,7 @@ const Appointments = () => {
                                                 </button>
                                                 <button
                                                     className="table-buttons-red"
-                                                    onClick={() => setDeleteId(appointment.id)} // Invoke deleteAppointment on click
+                                                    onClick={() => setDeleteId(appointment.id)}
                                                 >
                                                     <FontAwesomeIcon icon={faTrash} />
                                                 </button>
@@ -188,7 +178,6 @@ const Appointments = () => {
                     <p className="no-list-items-p">No appointments to display</p>
                 )}
             </div>
-            {/* Error Modal */}
             <ErrorModal
                 show={errorMessage !== ""}
                 onClose={() => setErrorMessage("")}

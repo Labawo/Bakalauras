@@ -40,14 +40,11 @@ const Login = () => {
                     withCredentials: true
                 }
             );
-            //console.log(JSON.stringify(response?.data));
-            //console.log(JSON.stringify(response));
             const accessToken = response?.data?.accessToken;
             const refreshToken = response?.data?.refreshToken;
             const decodedToken = jwtDecode(accessToken);
             const roles = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
             const id = decodedToken.sub;
-            //console.log(id);
             setAuth({ user, roles, id, accessToken, refreshToken });
             setUser('');
             setPwd('');

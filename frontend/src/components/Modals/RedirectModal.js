@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { FiCheckCircle } from "react-icons/fi";
-import "./ModalStyles.css"; // Import the CSS file
+import "./ModalStyles.css";
 
 const RedirectModal = ({ show, message, buttonText, score, destination }) => {
   const navigate = useNavigate();

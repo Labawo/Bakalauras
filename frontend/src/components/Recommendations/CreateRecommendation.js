@@ -21,7 +21,6 @@ const CreateRecommendation = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    // Validate input to prevent HTML or script injections
     const sanitizedValue = sanitizeInput(value);
     setFormData({
       ...formData,
@@ -30,28 +29,19 @@ const CreateRecommendation = () => {
   };
 
   const sanitizeInput = (value) => {
-    // Basic sanitation function to prevent HTML/script injections
-    // Implement according to your security requirements
     return value.replace(/(<([^>]+)>)/gi, "");
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Implement form validation logic here
-      // For instance, check if fields are not empty, etc.
-
       const response = await axiosPrivate.post(`/therapies/${therapyId}/appointments/${appointmentId}/recommendations`, formData); // Adjust the API endpoint and payload as per your backend
 
-      // Handle successful API response
       setSuccessMessage("Recommendation created successfully!");
-      // Clear form fields
       setFormData({ description: "" });
     } catch (error) {
-      // Handle API call errors
       console.error("Error creating recommendation:", error);
       setErrorMessage("Failed to create recommendation. Please try again.");
-      // Update state to display error messages or handle errors appropriately
     }
   };
 
@@ -80,7 +70,6 @@ const CreateRecommendation = () => {
             </button>
           </form>
         </div>
-        {/* Success Modal */}
         <SuccessModal
           show={successMessage !== ""}
           onClose={() => setSuccessMessage("")}
@@ -88,7 +77,6 @@ const CreateRecommendation = () => {
           buttonText="Go to Recommendations List"
           destination={`/therapies/${therapyId}/appointments/${appointmentId}/recommendations`}
         />
-        {/* Error Modal */}
         <ErrorModal
           show={errorMessage !== ""}
           onClose={() => setErrorMessage("")}

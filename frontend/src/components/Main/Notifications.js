@@ -1,8 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import useAxiosPrivate from "../../hooks/UseAxiosPrivate";
 import { useNavigate, useLocation } from "react-router-dom";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const Notifications = () => {
     const [notifications, setNotifications] = useState([]);
@@ -15,7 +13,7 @@ const Notifications = () => {
     const fetchNotifications = useCallback(async (pageNumber) => {
         try {
             const response = await axiosPrivate.get('/notifications', {
-                params: { pageNumber: pageNumber }, // Pass the page number as a query parameter
+                params: { pageNumber: pageNumber }, 
             });
             return response.data;
         } catch (err) {
@@ -32,7 +30,7 @@ const Notifications = () => {
         const data = await fetchNotifications(page);
         console.log(data)
         setNotifications(prevNotifications => [...prevNotifications, ...data]);
-        setPage(prevPage => prevPage + 1); // Move to the next page for the next load
+        setPage(prevPage => prevPage + 1);
         setIsLoading(false);
     };
 
@@ -49,7 +47,6 @@ const Notifications = () => {
             );
         } catch (error) {
             console.error(`Error removing note ${notificationId}:`, error);
-            // Handle error as needed
         }
     };
 

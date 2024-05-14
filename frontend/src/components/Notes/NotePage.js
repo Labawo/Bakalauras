@@ -4,10 +4,9 @@ import useAxiosPrivate from "../../hooks/UseAxiosPrivate";
 import NavBar from "../Main/NavBar";
 import Footer from "../Main/Footer";
 import Title from "../Main/Title";
-//import "./NotePage.css"; // Import a CSS file for styling (create NotePage.css in the same directory)
 
 const NotePage = () => {
-    const { noteId } = useParams(); // Get the noteId from the URL params
+    const { noteId } = useParams();
     const [note, setNote] = useState(null);
     const axiosPrivate = useAxiosPrivate();
     const navigate = useNavigate();
@@ -19,7 +18,6 @@ const NotePage = () => {
                 setNote(response.data.resource);
             } catch (error) {
                 console.error(error);
-                // Handle error, e.g., show a message or navigate to an error page
                 if (error.response && error.response.status === 404) {
                     navigate(-1);
                 }

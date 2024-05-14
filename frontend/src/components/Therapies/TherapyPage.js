@@ -18,7 +18,6 @@ const TherapyPage = () => {
                 setTherapy(response.data.resource);
             } catch (error) {
                 console.error(error);
-                // Handle error, e.g., show a message or navigate to an error page
                 if (error.response && error.response.status === 404) {
                     navigate(-1);
                 }

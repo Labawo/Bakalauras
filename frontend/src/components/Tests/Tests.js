@@ -12,7 +12,7 @@ const Tests = () => {
     const [page, setPage] = useState(2);
     const [isLoading, setIsLoading] = useState(false);
     const [patients, setPatients] = useState([]);
-    const [selectedPatientId, setSelectedPatientId] = useState(""); // State for selected patient
+    const [selectedPatientId, setSelectedPatientId] = useState("");
     const [selectedPatientUsername, setSelectedPatientUsername] = useState("");
     const axiosPrivate = useAxiosPrivate();
     const { auth } = useAuth();
@@ -52,9 +52,9 @@ const Tests = () => {
 
     useEffect(() => {
         if (selectedPatientId) {
-            setPage(2); // Reset page number
-            setTests([]); // Clear existing tests
-            loadTests(); // Load tests for the selected patient
+            setPage(2); 
+            setTests([]); 
+            loadTests(); 
         }
     }, [selectedPatientId]);
 
@@ -63,8 +63,8 @@ const Tests = () => {
     
         setIsLoading(true);
         
-        const data = await fetchTests(1, selectedPatientId); // Fetch data for the first page
-        setTests(data); // Replace existing tests with the new ones
+        const data = await fetchTests(1, selectedPatientId);
+        setTests(data);
         setIsLoading(false);
     }, [fetchTests, isLoading, selectedPatientId]);
 
@@ -75,7 +75,6 @@ const Tests = () => {
             setTest(response.data.resource);
         } catch (error) {
             console.error(error);
-            // Handle error, e.g., show a message or navigate to an error page
             setErrorMessage("Failed to inspect.")
         }
     };
@@ -85,9 +84,9 @@ const Tests = () => {
     
         setIsLoading(true);
     
-        const data = await fetchTests(page, selectedPatientId); // Fetch data for the current page
-        setTests(prevTests => [...prevTests, ...data]); // Append the new tests to the existing ones
-        setPage(prevPage => prevPage + 1); // Increment the page number
+        const data = await fetchTests(page, selectedPatientId); 
+        setTests(prevTests => [...prevTests, ...data]); 
+        setPage(prevPage => prevPage + 1); 
         setIsLoading(false);
     }, [fetchTests, isLoading, selectedPatientId, page]);
 
@@ -105,14 +104,14 @@ const Tests = () => {
 
     const handlePatientSelect = (e) => {
         const selectedOption = e.target.value;
-        const [patientId, username] = selectedOption.split('|'); // Assuming the value is in the format "patientId|username"
+        const [patientId, username] = selectedOption.split('|');
         setSelectedPatientId(patientId);
         setSelectedPatientUsername(username);
     }; 
 
     return (
         <article className="tests-container">
-            {isAdmin && patients.length > 0 && ( // Render patient selection only if user is admin and patients data is available
+            {isAdmin && patients.length > 0 && ( 
                 <>
                     <div className="patient-selection">
                         <h2 className="list-headers">HAD Tests</h2>
@@ -150,7 +149,7 @@ const Tests = () => {
                                                 </button>
                                                     <button
                                                         className="table-buttons-red"
-                                                        onClick={() => setDeleteId(test.id)} // Invoke deleteAppointment on click
+                                                        onClick={() => setDeleteId(test.id)}
                                                     >
                                                         <FontAwesomeIcon icon={faTrash} />
                                                     </button>

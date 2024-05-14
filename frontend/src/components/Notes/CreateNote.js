@@ -18,11 +18,9 @@ const CreateNote = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const axiosPrivate = useAxiosPrivate();
-  const { auth } = useAuth();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    // Validate input to prevent HTML or script injections
     const sanitizedValue = sanitizeInput(value);
     setFormData({
       ...formData,
@@ -42,17 +40,12 @@ const CreateNote = () => {
         content: formData.content
       };
   
-      // Send noteData as JSON payload
       const response = await axiosPrivate.post("/notes", noteData);
   
-      // Handle successful API response
       setSuccessMessage("Note created successfully!");
-      // Clear form fields
       setFormData({ name: "", content: "" });
     } catch (error) {
-      // Handle API call errors
       console.error("Error creating note:", error);
-      // Update state to display error messages or handle errors appropriately
       setErrorMessage("Failed to create note. Please try again.");
     }
   };  

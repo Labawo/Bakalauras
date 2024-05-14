@@ -88,7 +88,6 @@ const RegisterDoctor = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // if button enabled with JS hack
         const v1 = USER_REGEX.test(user);
         const v2 = PWD_REGEX.test(pwd);
         const v3 = EMAIL_REGEX.test(email);
@@ -108,10 +107,7 @@ const RegisterDoctor = () => {
             );
             console.log(response?.data);
             console.log(response?.accessToken);
-            //console.log(JSON.stringify(response))
             setSuccess(true);
-            //clear state and controlled inputs
-            //need value attrib on inputs for this
             setUser('');
             setPwd('');
             setEmail('');

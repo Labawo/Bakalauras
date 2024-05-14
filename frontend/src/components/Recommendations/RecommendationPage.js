@@ -6,7 +6,7 @@ import Footer from "../Main/Footer";
 import Title from "../Main/Title";
 
 const RecommendationPage = () => {
-    const { therapyId, appointmentId, recommendationId } = useParams(); // Get the therapyId from the URL params
+    const { therapyId, appointmentId, recommendationId } = useParams();
     const [recommendation, setRecommendation] = useState(null);
     const axiosPrivate = useAxiosPrivate();
     const navigate = useNavigate();
@@ -19,7 +19,6 @@ const RecommendationPage = () => {
                 console.log(response.data);
             } catch (error) {
                 console.error(error);
-                // Handle error, e.g., show a message or navigate to an error page
                 if (error.response && error.response.status === 404) {
                     navigate(-1);
                 }

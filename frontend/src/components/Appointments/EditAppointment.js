@@ -28,11 +28,9 @@ const EditAppointment = () => {
       try {
         const response = await axiosPrivate.get(`/therapies/${therapyId}/appointments/${appointmentId}`);
         const { time: datetime, price } = response.data;
-        const serverDate = new Date(datetime); // Convert server datetime to Date object
+        const serverDate = new Date(datetime);
 
-        // Get client's timezone offset in minutes
         const clientOffsetInMinutes = new Date().getTimezoneOffset();
-        // Convert offset to milliseconds and subtract to adjust to server time
         const clientDate = new Date(serverDate.getTime() - clientOffsetInMinutes * 60000);
 
         const formattedDateTime = clientDate.toISOString().split('T');
@@ -45,7 +43,7 @@ const EditAppointment = () => {
         if (error.response && error.response.status === 404) {
           navigate(-1);
         } else if (error.response && error.response.status === 403) {
-          navigate("/therapies"); // Redirect to unauthorized page
+          navigate("/therapies");
         }
       }
     };
@@ -76,11 +74,9 @@ const EditAppointment = () => {
     } catch (error) {
       if (error.response) {
         if (error.response.status === 400) {
-          // Handle specific error case (BadRequest)
           console.error('Bad request: ', error.response.data);
           setErrorMessage("Failed to create appointment. Please try again.");
         } else if (error.response.status === 409) {
-          // Handle Conflict error
           setErrorMessage("Appointment at this time already exists.");
         } else {
           console.error(`Error creating appointment for therapy ${therapyId}:`, error);
@@ -147,7 +143,6 @@ const EditAppointment = () => {
             </button>
           </form>
         </div>
-        {/* Success Modal */}
         <SuccessModal
           show={successMessage !== ""}
           onClose={() => setSuccessMessage("")}
@@ -155,7 +150,6 @@ const EditAppointment = () => {
           buttonText="Go to Appointment List"
           destination={`/therapies/${therapyId}/appointments`}
         />
-        {/* Error Modal */}
         <ErrorModal
           show={errorMessage !== ""}
           onClose={() => setErrorMessage("")}

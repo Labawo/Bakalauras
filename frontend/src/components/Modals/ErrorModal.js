@@ -1,6 +1,6 @@
 import React from "react";
 import { FiAlertTriangle } from "react-icons/fi";
-import "./ModalStyles.css"; // Import the CSS file
+import "./ModalStyles.css";
 
 const ErrorModal = ({ show, onClose, message }) => {
   return (

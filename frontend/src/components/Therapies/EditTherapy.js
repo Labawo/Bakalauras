@@ -140,7 +140,6 @@ const EditTherapy = () => {
             </button>
           </form>
         </div>
-        {/* Error Modal */}
         <SuccessModal
           show={successMessage !== ""}
           onClose={() => setSuccessMessage("")}

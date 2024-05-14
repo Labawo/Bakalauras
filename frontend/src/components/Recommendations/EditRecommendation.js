@@ -23,7 +23,6 @@ const EditRecommendation = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    // Validate input to prevent HTML or script injections
     const sanitizedValue = sanitizeInput(value);
     setFormData({
       ...formData,
@@ -32,8 +31,6 @@ const EditRecommendation = () => {
   };
 
   const sanitizeInput = (value) => {
-    // Basic sanitation function to prevent HTML/script injections
-    // Implement according to your security requirements
     return value.replace(/(<([^>]+)>)/gi, "");
   };
 
@@ -60,7 +57,7 @@ const EditRecommendation = () => {
         if (error.response && error.response.status === 404) {
           navigate(-1);
         } else if (error.response && error.response.status === 403) {
-          navigate("/therapies"); // Redirect to unauthorized page
+          navigate("/therapies");
         }
       }
     };
@@ -95,7 +92,6 @@ const EditRecommendation = () => {
             </button>
           </form>
         </div>
-        {/* Success Modal */}
         <SuccessModal
           show={successMessage !== ""}
           onClose={() => setSuccessMessage("")}
@@ -103,7 +99,6 @@ const EditRecommendation = () => {
           buttonText="Go to Recommendations List"
           destination={`/therapies/${therapyId}/appointments/${appointmentId}/recommendations`}
         />
-        {/* Error Modal */}
         <ErrorModal
           show={errorMessage !== ""}
           onClose={() => setErrorMessage("")}

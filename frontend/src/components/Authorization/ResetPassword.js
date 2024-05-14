@@ -11,10 +11,6 @@ const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const REGISTER_URL = '/resetPassword';
 
 const ResetPassword = () => {
-    const userRef = useRef();
-    const emailRef = useRef();
-    const nameRef = useRef();
-    const lastRef = useRef();
     const errRef = useRef();
 
     const axiosPrivate = useAxiosPrivate();
@@ -56,7 +52,6 @@ const ResetPassword = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // if button enabled with JS hack
         const v1 = PWD_REGEX.test(cpwd);
         const v2 = PWD_REGEX.test(pwd);
         if (!v1 || !v2 ) {
@@ -73,10 +68,7 @@ const ResetPassword = () => {
             );
             console.log(response?.data);
             console.log(response?.accessToken);
-            //console.log(JSON.stringify(response))
             setSuccess(true);
-            //clear state and controlled inputs
-            //need value attrib on inputs for this
             setcPwd('');
             setPwd('');
             setMatchPwd('');

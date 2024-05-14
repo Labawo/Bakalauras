@@ -1,6 +1,6 @@
 import React from "react";
 import { FiCheckCircle } from "react-icons/fi";
-import "./ModalStyles.css"; // Import the CSS file
+import "./ModalStyles.css";
 
 const SuccessSelectModal = ({ show, onClose, message }) => {
   return (

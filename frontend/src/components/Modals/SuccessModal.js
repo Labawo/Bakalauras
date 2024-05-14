@@ -1,14 +1,14 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { FiCheckCircle } from "react-icons/fi";
-import "./ModalStyles.css"; // Import the CSS file
+import "./ModalStyles.css";
 
 const SuccessModal = ({ show, onClose, message, buttonText, destination }) => {
   const navigate = useNavigate();
 
   const handleNavigation = () => {
     navigate(-1);
-    onClose(); // Close the modal after navigation
+    onClose();
   };
 
   return (

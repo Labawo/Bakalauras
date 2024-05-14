@@ -18,7 +18,6 @@ const Editor = () => {
     const [successMessage, setSuccessMessage] = useState("");
     const [deleteId, setDeleteId] = useState("");
     
-    // Set end date to 7 days after the start date
     const endDate = startDate ? new Date(new Date(startDate).getTime() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0] : "";
 
     useEffect(() => {
@@ -76,7 +75,6 @@ const Editor = () => {
     };
 
     const handleInspect = (therapyId, appintmentId) => {
-        // Navigate to the InspectPage with the therapyId parameter
         navigate(`/therapies/${therapyId}/appointments/${appintmentId}`);
     };
 

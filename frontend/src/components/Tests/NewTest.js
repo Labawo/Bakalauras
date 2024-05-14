@@ -4,10 +4,9 @@ import useAxiosPrivate from "../../hooks/UseAxiosPrivate";
 import NavBar from "../Main/NavBar";
 import Footer from "../Main/Footer";
 import Title from "../Main/Title";
-import useAuth from "../../hooks/UseAuth";
 import questionsData from "./questionsData";
-import RedirectModal from "../Modals/RedirectModal"; // Import the RedirectModal component
-import ErrorModal from "../Modals/ErrorModal"; // Import the ErrorModal component
+import RedirectModal from "../Modals/RedirectModal";
+import ErrorModal from "../Modals/ErrorModal";
 import "./TestStyle.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
@@ -40,7 +39,6 @@ const NewTest = () => {
   }, []);
 
   useEffect(() => {
-    // If there are previous answers, update the form data with them
     if (answers[currentPage]) {
       setFormData(answers[currentPage]);
     } else {
@@ -59,7 +57,6 @@ const NewTest = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Check if all questions are answered
       const isAllAnswered = answers.every(answer => answer !== null);
   
       if (!isAllAnswered) {

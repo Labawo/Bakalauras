@@ -1,8 +1,7 @@
-/* Responsive modal */
 .modal {
     display: none;
     position: fixed;
-    z-index: 1000; /* Set a high z-index value */
+    z-index: 1000; 
     left: 0;
     top: 0;
     width: 100%;
@@ -25,7 +24,6 @@
     border-radius: 8px;
 }
 
-/* Close button */
 .close {
     color: #aaa;
     font-size: 28px;
@@ -42,7 +40,6 @@
     cursor: pointer;
 }
 
-/* Modal buttons */
 .modal-buttons {
     text-align: center;
     margin-top: 20px;
@@ -63,7 +60,6 @@
     transition: background-color 0.3s ease;
 }
 
-/* Custom button classes */
 .primary-button {
     background-color: #007bff;
 }
@@ -92,7 +88,6 @@
     color: #ffd700;
 }
 
-/* Responsive button */
 @media only screen and (max-width: 600px) {
     .modal-content {
         width: 90%;

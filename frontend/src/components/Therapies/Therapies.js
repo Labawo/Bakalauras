@@ -19,27 +19,23 @@ const Therapies = () => {
     const [errorMessage, setErrorMessage] = useState("");
 
     const handleInspect = (therapyId) => {
-        // Navigate to the InspectPage with the therapyId parameter
         navigate(`/therapies/${therapyId}`);
     };
 
     const canAccessDoctor = auth.roles.includes("Doctor") || auth.roles.includes("Admin");
     
     const canAccessAdminOrCreator = (therapy) => {
-        // Check if the authenticated user is an admin
         const isAdmin = auth.roles.includes("Admin");
       
-        // Check if the authenticated user is the creator of the therapy
         const isCreator = therapy.doctorId === auth.id;
       
-        // Return true if the user is either an admin or the creator of the therapy
         return isAdmin || isCreator;
       };
 
     const fetchTherapies = useCallback(async (pageNumber) => {
         try {
             const response = await axiosPrivate.get('/therapies', {
-                params: { pageNumber : pageNumber }, // Pass the page number as a query parameter
+                params: { pageNumber : pageNumber }, 
             });
             return response.data;
         } catch (err) {
@@ -56,21 +52,19 @@ const Therapies = () => {
         const data = await fetchTherapies(page);
         console.log(data)
         setTherapies(prevTherapies => [...prevTherapies, ...data]);
-        setPage(prevPage => prevPage + 1); // Move to the next page for the next load
+        setPage(prevPage => prevPage + 1);
         setIsLoading(false);
     };
 
     useEffect(() => {
         loadTherapies();
-    }, []); // Load therapies only once on initial mount
+    }, []); 
 
     const createTherapy = () => {
-        // Navigate to the Create Therapy page
         navigate(`/therapies/createTherapy`);
     };
 
     const updateTherapy = (therapyId) => {
-        // Navigate to the Create Therapy page
         navigate(`/therapies/${therapyId}/editTherapy`);
     };
 
@@ -85,7 +79,6 @@ const Therapies = () => {
           console.error(`Error removing therapy ${therapyId}:`, error);
           setErrorMessage("Error removing therapy.")
           setDeleteId("");
-          // Handle error as needed
         }
       };
 

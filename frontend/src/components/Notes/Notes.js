@@ -4,7 +4,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faSearch, faEdit } from '@fortawesome/free-solid-svg-icons';
 import ConfirmationModal from "../Modals/ConfirmationModal";
-//import "./Notes.css"; // Import CSS file for styling
 
 const Notes = () => {
     const [notes, setNotes] = useState([]);
@@ -16,14 +15,13 @@ const Notes = () => {
     const [deleteId, setDeleteId] = useState("");
 
     const handleInspect = (noteId) => {
-        // Navigate to the InspectPage with the noteId parameter
         navigate(`/notes/${noteId}`);
     };
 
     const fetchNotes = useCallback(async (pageNumber) => {
         try {
             const response = await axiosPrivate.get('/notes', {
-                params: { pageNumber: pageNumber }, // Pass the page number as a query parameter
+                params: { pageNumber: pageNumber },
             });
             return response.data;
         } catch (err) {
@@ -40,21 +38,19 @@ const Notes = () => {
         const data = await fetchNotes(page);
         console.log(data)
         setNotes(prevNotes => [...prevNotes, ...data]);
-        setPage(prevPage => prevPage + 1); // Move to the next page for the next load
+        setPage(prevPage => prevPage + 1);
         setIsLoading(false);
     };
 
     useEffect(() => {
         loadNotes();
-    }, []); // Load notes only once on initial mount
+    }, []);
 
     const createNote = () => {
-        // Navigate to the Create Note page
         navigate(`/notes/createNote`);
     };
 
     const updateNote = (noteId) => {
-        // Navigate to the Edit Note page
         navigate(`/notes/${noteId}/editNote`);
     };
 
@@ -67,7 +63,6 @@ const Notes = () => {
             setDeleteId("");
         } catch (error) {
             console.error(`Error removing note ${noteId}:`, error);
-            // Handle error as needed
         }
     };
 
@@ -104,7 +99,7 @@ const Notes = () => {
                                         </button>
                                         <button
                                             className="table-buttons-red"
-                                            onClick={() => setDeleteId(note.id)} // Invoke deleteAppointment on click
+                                            onClick={() => setDeleteId(note.id)}
                                         >
                                             <FontAwesomeIcon icon={faTrash} />
                                         </button>

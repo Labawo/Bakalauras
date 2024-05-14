@@ -25,12 +25,10 @@ const CreateAppointment = () => {
     const { name, value } = e.target;
     let updatedValue = value;
 
-    // Prevent negative price input
     if (name === "price" && value < 0) {
       updatedValue = 0;
     }
 
-    // Prevent choosing a date in the past
     if (name === "date") {
       const currentDate = new Date().toISOString().split("T")[0];
       if (value < currentDate) {
@@ -39,7 +37,7 @@ const CreateAppointment = () => {
     }
 
     if (name === "price" && isNaN(value)) {
-      return; // Don't update state if input is not numeric
+      return; 
     }
 
     setFormData({
@@ -51,33 +49,23 @@ const CreateAppointment = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Combine date and time into a single datetime string
       const datetime = `${formData.date}T${formData.time}:00`;
-  
-      // Convert the combined datetime string to ISO format
-      const combinedDateTime = new Date(datetime).toISOString();
-      
-      // Prepare the payload with the datetime and price
+      const combinedDateTime = new Date(datetime).toISOString();      
       const payload = {
         time: combinedDateTime,
         price: formData.price,
       };
       console.log(payload);
-      // Send a POST request with the payload to create the appointment
       const response = await axiosPrivate.post(`therapies/${therapyId}/appointments`, payload);
   
-      // If the request is successful, set the success message and reset the form data
       setSuccessMessage("Appointment created successfully!");
       setFormData({ date: "", time: "", price: 0 });
     } catch (error) {
-      // Handle errors appropriately
       if (error.response) {
         if (error.response.status === 400) {
-          // Handle specific error case (BadRequest)
           console.error('Bad request: ', error.response.data);
           setErrorMessage("Failed to create appointment. Please try again.");
         } else if (error.response.status === 409) {
-          // Handle Conflict error
           setErrorMessage("Appointment at this time already exists.");
         } else {
           console.error(`Error creating appointment for therapy ${therapyId}:`, error);
@@ -120,7 +108,7 @@ const CreateAppointment = () => {
                 onChange={handleInputChange}
                 required
                 className="input-field"
-                step="60" // Set step to 60 (one minute)
+                step="60"
               />
             </div>
             <div className="form-group">
@@ -140,7 +128,6 @@ const CreateAppointment = () => {
             </button>
           </form>
         </div>
-        {/* Success Modal */}
         <SuccessModal
           show={successMessage !== ""}
           onClose={() => setSuccessMessage("")}
@@ -148,7 +135,6 @@ const CreateAppointment = () => {
           buttonText="Go to Appointment List"
           destination={`/therapies/${therapyId}/appointments`}
         />
-        {/* Error Modal */}
         <ErrorModal
           show={errorMessage !== ""}
           onClose={() => setErrorMessage("")}

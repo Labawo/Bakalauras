@@ -11,7 +11,7 @@ const MyAppointments = () => {
 
     const [appointments, setAppointments] = useState([]);
     const [recommendations, setRecommendations] = useState([]);
-    const [showPopup, setShowPopup] = useState(false); // State to control the popup visibility
+    const [showPopup, setShowPopup] = useState(false);
     const axiosPrivate = useAxiosPrivate();
     const navigate = useNavigate();
     const location = useLocation();
@@ -48,7 +48,7 @@ const MyAppointments = () => {
     const handleInspect = async (appointmentId) => {
         try {
             const response = await axiosPrivate.get(`/getMyAppointments/${appointmentId}/getMyRecommendations`);
-            console.log("Recommendations:", response.data); // Log the recommendations data
+            console.log("Recommendations:", response.data);
             setRecommendations(response.data);
             setShowPopup(true);
         } catch (error) {
@@ -57,8 +57,8 @@ const MyAppointments = () => {
     };
 
     const closePopup = () => {
-        setShowPopup(false); // Close the popup
-        setRecommendations([]); // Clear recommendations when closing
+        setShowPopup(false);
+        setRecommendations([]);
     };
 
     const filteredAppointments = appointments.filter(appointment => {
@@ -120,7 +120,6 @@ const MyAppointments = () => {
                         <p>No appointments to display</p>
                     )}
 
-                    {/* Popup for recommendations */}
                     {showPopup && (
                         <div className={`popup ${showPopup ? 'active' : ''}`} onClick={closePopup}>
                             <div className="popup-content" onClick={(e) => e.stopPropagation()}>

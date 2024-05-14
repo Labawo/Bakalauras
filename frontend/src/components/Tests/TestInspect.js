@@ -6,7 +6,7 @@ const TestInspect = ({ show, onClose, message, message2, user }) => {
   const renderMessageLines = (message) => {
     const lines = message.split("\n");
     const reversedLines = lines.reverse();
-    const reversedWithoutFirst = [reversedLines[0], ...reversedLines.slice(1).reverse()]; // Reverse all but the first line
+    const reversedWithoutFirst = [reversedLines[0], ...reversedLines.slice(1).reverse()];
 
     return reversedWithoutFirst.map((line, index) => (
       <p

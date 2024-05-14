@@ -8,7 +8,7 @@ import SuccessModal from "../Modals/SuccessModal";
 import ErrorModal from "../Modals/ErrorModal";
 
 const EditNote = () => {
-  const { noteId } = useParams(); // Get the noteId from the URL params
+  const { noteId } = useParams();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -33,7 +33,7 @@ const EditNote = () => {
         if (error.response && error.response.status === 404) {
           navigate(-1);
         } else if (error.response && error.response.status === 403) {
-          navigate("/notes"); // Redirect to notes page if unauthorized
+          navigate("/notes");
         }
       }
     };
@@ -51,8 +51,6 @@ const EditNote = () => {
   };
 
   const sanitizeInput = (value) => {
-    // Basic sanitation function to prevent HTML/script injections
-    // Implement according to your security requirements
     return value.replace(/(<([^>]+)>)/gi, "");
   };
 

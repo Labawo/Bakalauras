@@ -1,6 +1,6 @@
 import React from "react";
-import { FiAlertCircle } from "react-icons/fi"; // Assuming you want to use FiAlertCircle for confirmation
-import "./ModalStyles.css"; // Import the CSS file
+import { FiAlertCircle } from "react-icons/fi";
+import "./ModalStyles.css";
 
 const ConfirmationModal = ({ show, onClose, onConfirm, message }) => {
   return (

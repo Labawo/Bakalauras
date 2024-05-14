@@ -53,36 +53,37 @@ function App() {
           <Route path="/notes/createNote" element={<CreateNotePage />} />
           <Route path="/notes/:noteId/editNote" element={<EditNotePage />} />
           <Route path="/tests/newTest" element={<NewTestPage />} />
+          <Route path="/myAppointments" element={<MyAppointmentsPage />} />
         </Route>
 
         <Route element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Editor]} />}>
           <Route path="/" element={<Home />} />
           <Route path="/therapies" element={<TherapiesPage />} />
-          <Route path="/resetPassword" element={<ResetPassword />} />
-          <Route path="/myAppointments" element={<MyAppointmentsPage />} />
+          <Route path="/resetPassword" element={<ResetPassword />} />          
           <Route path="/therapies/:therapyId" element={<TherapyPage />} />
           <Route path="/therapies/:therapyId/appointments" element={<AppointmentsPage />} />
           <Route path="/therapies/:therapyId/appointments/:appointmentId" element={<AppointmentPage />} />
           <Route path="/tests" element={<TestsPage />} />
         </Route>
 
-        <Route element={<RequireAuth allowedRoles={[ROLES.Editor]} />}>
-          <Route path="/therapies/:therapyId/appointments/:appointmentId/recommendations" element={<RecommendationsPage />} />
-          <Route path="/therapies/:therapyId/appointments/:appointmentId/recommendations/:recommendationId" element={<RecommendationPage />} />
+        <Route element={<RequireAuth allowedRoles={[ROLES.User, ROLES.Editor]} doNotPassAdmin = {true}/>}>
+          <Route path="/tests" element={<TestsPage />} />
+        </Route>
+
+        <Route element={<RequireAuth allowedRoles={[ROLES.Editor]} />}>          
           <Route path="/therapies/createTherapy" element={<CreateTherapyPage />} />
           <Route path="/therapies/:therapyId/editTherapy" element={<EditTherapyPage />} />
           <Route path="/therapies/:therapyId/appointments/createAppointment" element={<CreateAppointment />} />
-          <Route path="/therapies/:therapyId/appointments/:appointmentId/editAppointment" element={<EditAppointment />} />
-          <Route path="/therapies/:therapyId/appointments/createAppointment" element={<CreateAppointment />} />
-          <Route path="/therapies/:therapyId/appointments/:appointmentId/editAppointment" element={<EditAppointment />} />
+          <Route path="/therapies/:therapyId/appointments/:appointmentId/editAppointment" element={<EditAppointment />} />         
+        </Route>
+
+        <Route element={<RequireAuth allowedRoles={[ROLES.Editor]} doNotPassAdmin = {true}/>}>
+          <Route path="editor" element={<Editor />} />
+          <Route path="/therapies/:therapyId/appointments/:appointmentId/recommendations" element={<RecommendationsPage />} />
+          <Route path="/therapies/:therapyId/appointments/:appointmentId/recommendations/:recommendationId" element={<RecommendationPage />} />
           <Route path="/therapies/:therapyId/appointments/:appointmentId/recommendations/createRecommendation" element={<CreateRecommendation />} />
           <Route path="/therapies/:therapyId/appointments/:appointmentId/recommendations/:recommendationId/editRecommendation" element={<EditRecommendation />} />
         </Route>
-
-        <Route element={<RequireAuth allowedRoles={[ROLES.Editor]} />}>
-          <Route path="editor" element={<Editor />} />
-        </Route>
-
 
         <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
           <Route path="admin" element={<Admin />} />

@@ -38,7 +38,6 @@ const TestsPage = () => {
     }, []);
 
     const createTest = () => {
-        // Navigate to the Create Test page
         navigate('/tests/newTest');
     };
 
@@ -53,7 +52,11 @@ const TestsPage = () => {
                             <h2>HAD Test</h2>
                             <div>
                                 <p>
-                                    The Hospital Anxiety and Depression Scale (HADS) is a widely used self-assessment questionnaire designed to measure levels of anxiety and depression in individuals. Consisting of 14 items, the HADS assesses symptoms such as nervousness, restlessness, sadness, and loss of interest or pleasure. It provides separate scores for anxiety and depression, allowing for the identification of specific mental health concerns. The HADS is commonly utilized in healthcare settings, particularly in hospitals, to screen patients for anxiety and depression. Its brevity, simplicity, and focus on emotional symptoms make it a valuable tool for healthcare professionals in assessing and monitoring mental health conditions. Overall, the HADS facilitates early detection and intervention for anxiety and depression, ultimately contributing to improved patient care and well-being.
+                                    The Hospital Anxiety and Depression Scale (HADS) is a widely used self-assessment questionnaire designed to measure levels of anxiety and depression in individuals. 
+                                    Consisting of 14 items, the HADS assesses symptoms such as nervousness, restlessness, sadness, and loss of interest or pleasure. It provides separate scores for anxiety and depression, 
+                                    allowing for the identification of specific mental health concerns. The HADS is commonly utilized in healthcare settings, particularly in hospitals, to screen patients for anxiety and depression. 
+                                    Its brevity, simplicity, and focus on emotional symptoms make it a valuable tool for healthcare professionals in assessing and monitoring mental health conditions. Overall, the HADS facilitates early detection and intervention for anxiety and depression, 
+                                    ultimately contributing to improved patient care and well-being.
                                 </p>
                             </div>
                             {canAccess() && (

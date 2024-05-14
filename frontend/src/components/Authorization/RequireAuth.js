@@ -7,7 +7,7 @@ const RequireAuth = ({ allowedRoles, doNotPassAdmin = false }) => {
 
     const userRoles = typeof auth.roles === 'string' ? [auth.roles] : auth.roles;
 
-    const allowAdminToPass = doNotPassAdmin ? !userRoles.includes("Admin") : true;
+    const allowAdminToPass = doNotPassAdmin && userRoles ? !userRoles.includes("Admin")  : true;
 
     return (
         userRoles && (userRoles.includes(allowedRoles) || userRoles.some(role => allowedRoles.includes(role))) &&
