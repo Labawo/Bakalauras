@@ -56,24 +56,6 @@ const Editor = () => {
         }
     };
 
-    const handleTestAllowance = async (patientId, patientName) => {
-        try {
-            await axiosPrivate.put(`/allowTest/${patientId}`);
-            setSuccessMessage(`You allowed tests for patient ${patientName}`);
-        } catch (error) {
-            console.error("Error alowing test for user:", error);
-        }
-    };
-
-    const handleTestRestriction = async (patientId, patientName) => {
-        try {
-            await axiosPrivate.put(`/restrictTest/${patientId}`);
-            setSuccessMessage(`You restricted tests for patient ${patientName}`);
-        } catch (error) {
-            console.error("Error alowing test for user:", error);
-        }
-    };
-
     const handleInspect = (therapyId, appintmentId) => {
         navigate(`/therapies/${therapyId}/appointments/${appintmentId}`);
     };
@@ -124,12 +106,6 @@ const Editor = () => {
                                                 onClick={() => handleInspect(appointment.therapyId, appointment.id)}
                                             >
                                                 <FontAwesomeIcon icon={faSearch} />
-                                            </button>
-                                            <button className="table-buttons-green allowance" onClick={() => handleTestAllowance(appointment.patientId, appointment.patientName)}>
-                                                Allow test
-                                            </button>
-                                            <button className="table-buttons-red restriction" onClick={() => handleTestRestriction(appointment.patientId, appointment.patientName)}>
-                                                Restrict test
                                             </button>
                                             <button
                                                     className="table-buttons-red"

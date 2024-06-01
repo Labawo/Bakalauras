@@ -6,6 +6,7 @@ import Home from './components/Main/Home';
 import Layout from './components/Main/Layout';
 import Editor from './components/Appointments/Editor';
 import Admin from './components/Users/Admin';
+import Psychologist from './components/Users/Psychologist';
 import Missing from './components/Main/Missing';
 import Unauthorized from './components/Authorization/Unauthorized';
 import TherapiesPage from './components/Therapies/TherapiesPage';
@@ -79,6 +80,7 @@ function App() {
 
         <Route element={<RequireAuth allowedRoles={[ROLES.Editor]} doNotPassAdmin = {true}/>}>
           <Route path="editor" element={<Editor />} />
+          <Route path="psychologist" element={<Psychologist />} />
           <Route path="/therapies/:therapyId/appointments/:appointmentId/recommendations" element={<RecommendationsPage />} />
           <Route path="/therapies/:therapyId/appointments/:appointmentId/recommendations/:recommendationId" element={<RecommendationPage />} />
           <Route path="/therapies/:therapyId/appointments/:appointmentId/recommendations/createRecommendation" element={<CreateRecommendation />} />

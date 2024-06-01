@@ -57,6 +57,9 @@ const NavBar = () => {
                     <span className={canAccessDoctor ? `nav-link-span ${isActiveLink('/editor') ? 'active-span' : ''}` : 'hidden'}>
                         <Link to="/editor" className={canAccessDoctor ? 'nav-link' : 'hidden'}>Weekly Appointments</Link>
                     </span>
+                    <span className={canAccessDoctor ? `nav-link-span ${isActiveLink('/psychologist') ? 'active-span' : ''}` : 'hidden'}>
+                        <Link to="/psychologist" className={canAccessDoctor ? 'nav-link' : 'hidden'}>Patients</Link>
+                    </span>
                     <span className={canAccessAdmin ? `nav-link-span ${isActiveLink('/admin') ? 'active-span' : ''}` : 'hidden'}>
                         <Link to="/admin" className={canAccessAdmin ? 'nav-link' : 'hidden'}>Admin</Link>
                     </span>

@@ -118,7 +118,6 @@ const CreateTherapy = () => {
               >
                 <option value="">Select Therapy Type</option>
                 <option value="Consulting">Consulting</option>
-                <option value="Couples consulting">Couples consulting</option>
                 <option value="Music therapy">Music therapy</option>
                 <option value="Film therapy">Film therapy</option>
                 <option value="Psychoeducation">Psychoeducation</option>
