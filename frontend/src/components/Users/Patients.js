@@ -56,6 +56,10 @@ const Patients = () => {
         }
     };
 
+    const canDoTest = (time) => {
+        return new Date(time) > new Date();
+    }
+
     return (
         <article>
             <div className="table-container">
@@ -83,7 +87,7 @@ const Patients = () => {
                                 <tr key={i}>
                                     <td>{user?.userName}</td>
                                     <td>{user?.email}</td>
-                                    <td>{user?.testTimer}</td>
+                                    <td className={canDoTest(user.testTimer) ? 'green' : 'red'}>{user?.testTimer.split('T')[0] + " " + user?.testTimer.split('T')[1].slice(0, 5)}</td>
                                     <td>
                                         <button className="table-buttons-green allowance" onClick={() => handleTestAllowance(user.id, user.userName)}>
                                             Allow test

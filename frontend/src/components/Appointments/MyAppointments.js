@@ -6,6 +6,8 @@ import useAxiosPrivate from "../../hooks/UseAxiosPrivate";
 import { useNavigate, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import ConfirmationModal from "../Modals/ConfirmationModal";
+import ErrorModal from "../Modals/ErrorModal";
 
 const MyAppointments = () => {
 
@@ -16,6 +18,9 @@ const MyAppointments = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const [startDate, setStartDate] = useState("");
+    const [deleteId, setDeleteId] = useState("");
+    const [updateList, setUpdateList] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
 
     const endDate = startDate ? new Date(new Date(startDate).getTime() + 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0] : "";
 
@@ -31,6 +36,7 @@ const MyAppointments = () => {
                     }),
                 ]);
                 isMounted && setAppointments(appointmentsResponse.data);
+                console.log(new Date());
             } catch (err) {
                 console.error(err);
                 navigate('/login', { state: { from: location }, replace: true });
@@ -43,7 +49,7 @@ const MyAppointments = () => {
             isMounted = false;
             controller.abort();
         };
-    }, [axiosPrivate, navigate, location]);
+    }, [axiosPrivate, navigate, location, updateList]);
 
     const handleInspect = async (appointmentId) => {
         try {
@@ -52,7 +58,19 @@ const MyAppointments = () => {
             setRecommendations(response.data);
             setShowPopup(true);
         } catch (error) {
-            console.error("Error fetching recommendations:", error);
+            console.error("Error fetching recommendations:", error);           
+        }
+    };
+
+    const handleAttendance = async (appointmentId) => {
+        try {
+            const response = await axiosPrivate.put(`/getMyAppointments/${appointmentId}/cancelAppointment`);
+            setDeleteId("");
+            setUpdateList(!updateList);
+        } catch (error) {
+            console.error("Error canceling appointment", error);
+            setDeleteId("");
+            setErrorMessage("You can't cancel appointment at this time.");
         }
     };
 
@@ -111,6 +129,12 @@ const MyAppointments = () => {
                                             >
                                                 <FontAwesomeIcon icon={faSearch} />
                                             </button>
+                                            <button 
+                                                className={new Date(appointment?.time) < new Date() ? 'hidden' : 'red-button'}
+                                                onClick={() => setDeleteId(appointment.id)}
+                                            >
+                                                Can't attend
+                                            </button>
                                         </td>
                                     </tr>
                                 ))}
@@ -156,7 +180,18 @@ const MyAppointments = () => {
                             </div>
                         </div>
                     )}
-                </div>                
+                </div>
+                <ConfirmationModal 
+                    show={deleteId !== ""}
+                    onClose={() => setDeleteId("")}
+                    onConfirm={() => handleAttendance(deleteId)}
+                    message={"Are you sure you want to cancel appointment? You will not be able to repeat this action for 10 minutes"}
+                />
+                <ErrorModal
+                    show={errorMessage !== ""}
+                    onClose={() => setErrorMessage("")}
+                    message={errorMessage}
+                />              
             </section>
             <Footer />
         </>        

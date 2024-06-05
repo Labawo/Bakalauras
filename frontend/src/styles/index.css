@@ -628,6 +628,27 @@ tbody tr {
     margin-right: 40%;
 }
 
+.red {
+    color: red;
+}
+
+.green {
+    color: green;
+}
+
+.red-button {
+    width: 135px;
+    cursor: pointer;
+    color: white;
+    background-color: #f44336;
+    font-weight: bold;
+    border: none;
+}
+
+.red-button:hover{
+    background-color: red;
+}
+
 @media screen and (max-width: 768px) { 
     section {
         max-width: 100%;

@@ -96,6 +96,7 @@ const CreateAppointment = () => {
                 onChange={handleInputChange}
                 required
                 className="input-field"
+                placeholder="YYYY-MM-DD"
               />
             </div>
             <div className="form-group">
