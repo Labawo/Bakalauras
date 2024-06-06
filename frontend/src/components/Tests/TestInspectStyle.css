@@ -19,7 +19,7 @@
     margin: 10% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%;
+    width: 50%;
     max-width: 80%;
     border-radius: 8px;
 }
@@ -81,6 +81,29 @@
 
 .confirmation-header {
     color: #ffd700;
+}
+
+.results-div-written {
+    width: 75%;
+    margin: auto;
+}
+
+.copy-button {
+    width: 10%;
+    border: none;
+    background-color: white;
+    color: grey;
+    cursor: pointer;
+    font-size: 25px;
+}
+
+.copy-button:hover {
+    color: black;
+    cursor: pointer;
+}
+
+.copy-button-div {
+    text-align: center;
 }
 
 @media only screen and (max-width: 600px) {

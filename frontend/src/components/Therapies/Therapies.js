@@ -102,6 +102,17 @@ const Therapies = () => {
                                     <p>Psych. {therapy?.description}</p>
                                 </div>
                                 <div className="therapy-actions">
+                                    
+                                    {canAccessAdminOrCreator(therapy) ? (
+                                        <>
+                                            <button 
+                                                className="table-buttons-blue"
+                                                onClick={() => updateTherapy(therapy.id)}
+                                            >
+                                                <FontAwesomeIcon icon={faEdit} />
+                                            </button>
+                                        </>
+                                    ) : <button className="mock-button"></button>}
                                     <button 
                                         className="table-buttons-blue"
                                         onClick={() => handleInspect(therapy.id)}
@@ -110,12 +121,6 @@ const Therapies = () => {
                                     </button>
                                     {canAccessAdminOrCreator(therapy) && (
                                         <>
-                                            <button 
-                                                className="table-buttons-blue"
-                                                onClick={() => updateTherapy(therapy.id)}
-                                            >
-                                                <FontAwesomeIcon icon={faEdit} />
-                                            </button>
                                             <button
                                                 className="table-buttons-red"
                                                 onClick={() => setDeleteId(therapy.id)}

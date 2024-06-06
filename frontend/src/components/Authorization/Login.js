@@ -64,7 +64,7 @@ const Login = () => {
     }
 
     return (
-        <section>
+        <section className='log-reg-sec'>
             <div className='login-div'>
                 <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                 <h1>Sign In</h1>

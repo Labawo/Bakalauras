@@ -133,12 +133,16 @@ const Tests = () => {
                                 <thead>
                                     <tr>
                                         <th>Name</th>
+                                        <th>Depression score</th>
+                                        <th>Anxiety score</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {tests.map((test, i) => (
                                         <tr key={i}>
                                             <td>{test?.name}</td>
+                                            <td>{test?.depressionScore}</td>
+                                            <td>{test?.anxietyScore}</td>
                                             {isAdmin && (
                                                 <td>
                                                 <button 

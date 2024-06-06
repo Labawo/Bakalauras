@@ -37,13 +37,17 @@ h3 {
 
 section {
     width: 100vw; 
-    min-height: 100vh; 
+    min-height: 80vh; 
     max-width: 100%; 
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     padding: 2rem; 
     background-color: white;
+}
+
+.log-reg-sec {
+    min-height: 95vh; 
 }
 
 form {
@@ -390,6 +394,15 @@ li {
     padding-left: 15px;
     padding-right: 35px;
     transition: background-color 0.3s; 
+    width: 0;
+}
+
+.mock-button {
+    background-color: white;
+    border: none;
+    color: white;
+    padding-left: 15px;
+    padding-right: 35px; 
     width: 0;
 }
 
