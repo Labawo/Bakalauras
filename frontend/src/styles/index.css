@@ -645,8 +645,12 @@ tbody tr {
     border: none;
 }
 
-.red-button:hover{
+.red-button:hover {
     background-color: red;
+}
+
+.error-message {
+    color: red;
 }
 
 @media screen and (max-width: 768px) { 
